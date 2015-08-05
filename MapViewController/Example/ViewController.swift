@@ -8,11 +8,5 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    @IBAction func showMap(sender: AnyObject) {
-        let mapViewController = MapViewController()
-        self.presentViewController(mapViewController, animated: true, completion: nil)
-    }
-}
+class ViewController: UIViewController {}
 

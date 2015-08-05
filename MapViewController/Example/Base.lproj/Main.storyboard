@@ -20,7 +20,7 @@
                                 <rect key="frame" x="264" y="285" width="72" height="30"/>
                                 <state key="normal" title="Show Map"/>
                                 <connections>
-                                    <action selector="showMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1fn-f0-GFQ"/>
+                                    <segue destination="GwR-pf-8n0" kind="presentation" id="fmE-Me-CcM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -33,6 +33,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zuN-0K-rhE">
+            <objects>
+                <navigationController id="GwR-pf-8n0" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="h5w-TH-b5S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="hay-3h-yiE" kind="relationship" relationship="rootViewController" id="286-th-Fs1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0KW-xz-OfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1091" y="137"/>
+        </scene>
+        <!--Select Nearby Location-->
+        <scene sceneID="xeJ-Bh-2ut">
+            <objects>
+                <viewController id="hay-3h-yiE" customClass="MapViewController" customModule="MapViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="Select Nearby Location" id="ZTt-kE-O9k">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="hhi-pn-6Ow">
+                            <connections>
+                                <action selector="dismiss:" destination="hay-3h-yiE" id="jPa-2w-0ma"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nIJ-jG-L3P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1814" y="137"/>
         </scene>
     </scenes>
 </document>

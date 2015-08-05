@@ -51,6 +51,12 @@ class MapViewController: UIViewController {
         self.mapView.setRegion(region, animated: true)
     }
 
+    // MARK: Actions
+
+    @IBAction func dismiss(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
 }
 
 // MARK: CLLocationManagerDelegate
