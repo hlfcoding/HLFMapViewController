@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="MapViewController" customModuleProvider="target">
             <connections>
+                <outlet property="mapLoadingIndicator" destination="bFc-3I-HFj" id="sMc-oj-9X1"/>
                 <outlet property="mapView" destination="G8V-3k-Wdt" id="Pbp-yq-GB5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -15,19 +16,24 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="G8V-3k-Wdt">
+                <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="G8V-3k-Wdt">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="4j0-hg-bdI"/>
                     </connections>
                 </mapView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bFc-3I-HFj">
+                    <rect key="frame" x="290" y="290" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="G8V-3k-Wdt" secondAttribute="bottom" id="2li-I6-lwV"/>
                 <constraint firstItem="G8V-3k-Wdt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Yfl-bA-srW"/>
                 <constraint firstAttribute="trailing" secondItem="G8V-3k-Wdt" secondAttribute="trailing" id="aIN-cg-n6x"/>
+                <constraint firstItem="bFc-3I-HFj" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="eh2-WS-8M2"/>
                 <constraint firstItem="G8V-3k-Wdt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mrn-7J-SUz"/>
+                <constraint firstItem="bFc-3I-HFj" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xL3-Sj-dNo"/>
             </constraints>
         </view>
     </objects>
