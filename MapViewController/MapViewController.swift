@@ -86,6 +86,26 @@ class MapViewController: UIViewController {
         }
     }
 
+    private func searchMapItemsWithQuery(query: String) {
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = query
+        request.region = self.mapView.region
+
+        let search = MKLocalSearch(request: request)
+        search.startWithCompletionHandler { (searchResponse, error) in
+            guard let mapItems = searchResponse?.mapItems else {
+                print("MKLocalSearch error: \(error)")
+                return
+            }
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            let placemarks = mapItems.map { (mapItem) -> MKAnnotation in
+                return mapItem.placemark
+            }
+            self.mapView.showAnnotations(placemarks, animated: true)
+            // TODO: Update resultsViewController.
+        }
+    }
+
     private func zoomToLocation(location: CLLocation, animated: Bool) {
         self.revealMapView()
 
@@ -137,6 +157,12 @@ extension MapViewController: MKMapViewDelegate {
 // MARK: UISearchBarDelegate
 
 extension MapViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        guard let text = searchBar.text else { return }
+        self.searchMapItemsWithQuery(text)
+    }
 
 }
 
