@@ -17,6 +17,8 @@
 		E34EA1821B6F4AA100C1FB68 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34EA1801B6F4AA100C1FB68 /* MapViewController.xib */; };
 		E34EA1871B6F4FA300C1FB68 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34EA1861B6F4FA300C1FB68 /* MapKit.framework */; };
 		E34EA1891B6F5AE100C1FB68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34EA1881B6F5AE100C1FB68 /* CoreLocation.framework */; };
+		E34EA1911B73619700C1FB68 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34EA18F1B73619700C1FB68 /* SearchResultsViewController.swift */; };
+		E34EA1921B73619700C1FB68 /* SearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34EA1901B73619700C1FB68 /* SearchResultsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		E34EA1801B6F4AA100C1FB68 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		E34EA1861B6F4FA300C1FB68 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E34EA1881B6F5AE100C1FB68 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E34EA18F1B73619700C1FB68 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		E34EA1901B73619700C1FB68 /* SearchResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 				E34EA1831B6F4DBA00C1FB68 /* Example */,
 				E34EA17F1B6F4AA100C1FB68 /* MapViewController.swift */,
 				E34EA1801B6F4AA100C1FB68 /* MapViewController.xib */,
+				E34EA18F1B73619700C1FB68 /* SearchResultsViewController.swift */,
+				E34EA1901B73619700C1FB68 /* SearchResultsViewController.xib */,
 			);
 			path = MapViewController;
 			sourceTree = "<group>";
@@ -212,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E34EA16A1B6F491200C1FB68 /* LaunchScreen.storyboard in Resources */,
+				E34EA1921B73619700C1FB68 /* SearchResultsViewController.xib in Resources */,
 				E34EA1671B6F491200C1FB68 /* Assets.xcassets in Resources */,
 				E34EA1651B6F491200C1FB68 /* Main.storyboard in Resources */,
 				E34EA1821B6F4AA100C1FB68 /* MapViewController.xib in Resources */,
@@ -233,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E34EA1621B6F491200C1FB68 /* ViewController.swift in Sources */,
+				E34EA1911B73619700C1FB68 /* SearchResultsViewController.swift in Sources */,
 				E34EA1811B6F4AA100C1FB68 /* MapViewController.swift in Sources */,
 				E34EA1601B6F491200C1FB68 /* AppDelegate.swift in Sources */,
 			);
@@ -426,6 +434,7 @@
 				E34EA17B1B6F491200C1FB68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E34EA17C1B6F491200C1FB68 /* Build configuration list for PBXNativeTarget "MapViewControllerUITests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +443,7 @@
 				E34EA17E1B6F491200C1FB68 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

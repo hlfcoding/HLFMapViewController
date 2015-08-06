@@ -16,11 +16,14 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
 
     var locationManager: CLLocationManager!
+    var searchController: UISearchController!
+    var resultsViewController: SearchResultsViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.initLocationManager()
+        self.initSearchController()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +42,20 @@ class MapViewController: UIViewController {
         } else {
             self.handleLocationAuthorizationDenial()
         }
+    }
+
+    private func initSearchController() {
+        self.resultsViewController = SearchResultsViewController(nibName: "SearchResultsViewController", bundle: nil)
+        self.resultsViewController.tableView.delegate = self
+
+        self.searchController = UISearchController(searchResultsController: self.resultsViewController)
+        self.searchController.delegate = self
+        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.searchResultsUpdater = self
+        self.searchController.searchBar.delegate = self
+        self.searchController.searchBar.placeholder = "Search for place or address"
+        self.searchController.searchBar.sizeToFit()
+        self.navigationItem.titleView = self.searchController.searchBar
     }
 
     private func handleLocationAuthorizationDenial() {
@@ -114,5 +131,33 @@ extension MapViewController: MKMapViewDelegate {
         guard let location = userLocation.location else { return }
         self.zoomToLocation(location, animated: false)
     }
+
+}
+
+// MARK: UISearchBarDelegate
+
+extension MapViewController: UISearchBarDelegate {
+
+}
+
+// MARK: UISearchControllerDelegate
+
+extension MapViewController: UISearchControllerDelegate {
+
+}
+
+// MARK: UISearchResultsUpdating
+
+extension MapViewController: UISearchResultsUpdating {
+
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+
+    }
+
+}
+
+// MARK: UITableViewDelegate
+
+extension MapViewController: UITableViewDelegate {
 
 }
