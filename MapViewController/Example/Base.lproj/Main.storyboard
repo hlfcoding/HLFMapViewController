@@ -20,7 +20,7 @@
                                 <rect key="frame" x="264" y="285" width="72" height="30"/>
                                 <state key="normal" title="Show Map"/>
                                 <connections>
-                                    <segue destination="GwR-pf-8n0" kind="presentation" id="fmE-Me-CcM"/>
+                                    <segue destination="GwR-pf-8n0" kind="presentation" identifier="presentMap" id="fmE-Me-CcM"/>
                                 </connections>
                             </button>
                         </subviews>

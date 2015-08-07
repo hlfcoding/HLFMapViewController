@@ -10,7 +10,15 @@ import CoreLocation
 import MapKit
 import UIKit
 
+@objc protocol MapViewControllerDelegate: NSObjectProtocol {
+
+    func mapViewController(mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem)
+
+}
+
 class MapViewController: UIViewController {
+
+    weak var delegate: MapViewControllerDelegate?
 
     @IBOutlet weak var mapLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
@@ -18,6 +26,18 @@ class MapViewController: UIViewController {
     var locationManager: CLLocationManager!
     var searchController: UISearchController!
     var resultsViewController: SearchResultsViewController!
+
+    var currentPlacemark: MKPlacemark?
+
+    init(delegate: MapViewControllerDelegate) {
+        super.init(nibName: "MapViewController", bundle: nil)
+
+        self.delegate = delegate
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +91,17 @@ class MapViewController: UIViewController {
 
         self.definesPresentationContext = true
         self.navigationItem.titleView = self.searchController.searchBar
+    }
+
+    private func findMatchingMapViewAnnotation(reference: MKAnnotation) -> MKAnnotation? {
+        var match: MKAnnotation?
+        for annotation in self.mapView.annotations
+            where annotation.coordinate.latitude == reference.coordinate.latitude &&
+                  annotation.coordinate.longitude == reference.coordinate.longitude
+        {
+            match = annotation
+        }
+        return match
     }
 
     private func handleLocationAuthorizationDenial() {
@@ -167,6 +198,33 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         guard let location = userLocation.location else { return }
         self.zoomToLocation(location, animated: false)
+    }
+
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        guard !annotation.isEqual(mapView.userLocation) else { return nil }
+
+        let reuseIdentifier = "customAnnotation"
+        let dequeued = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseIdentifier)
+        guard dequeued == nil else {
+            dequeued!.annotation = annotation
+            return dequeued
+        }
+
+        let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        view.canShowCallout = true
+        let selectButton = UIButton(type: .ContactAdd)
+        view.rightCalloutAccessoryView = selectButton
+
+        return view
+    }
+
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView,
+                 calloutAccessoryControlTapped control: UIControl)
+    {
+        guard let selectButton = control as? UIButton
+              where selectButton.buttonType == .ContactAdd
+              else { return }
+        self.delegate?.mapViewController(self, didSelectMapItem: MKMapItem(placemark: view.annotation as! MKPlacemark))
     }
 
 }
