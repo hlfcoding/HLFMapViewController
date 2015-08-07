@@ -24,11 +24,23 @@ class MapViewController: UIViewController {
 
         self.initLocationManager()
         self.initSearchController()
+
+        // TODO: Handle location loading timeout.
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        // TODO: Restore searchController state by implementing UIStateRestoring.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+
+        self.mapView.removeAnnotations(self.mapView.annotations)
     }
+
+    // MARK: Implementation
 
     private func initLocationManager() {
         self.locationManager = CLLocationManager()
@@ -67,7 +79,7 @@ class MapViewController: UIViewController {
             message: "You've denied sharing your current location. You can always find your location manually.",
             preferredStyle: .Alert
         )
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default) { (action) in
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default) { (action) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
         self.presentViewController(alertController, animated: true, completion: nil)
@@ -107,7 +119,7 @@ class MapViewController: UIViewController {
             let placemarks = mapItems.map { (mapItem) -> MKAnnotation in
                 return mapItem.placemark
             }
-            self.mapView.showAnnotations(placemarks, animated: true)
+            self.mapView.showAnnotations(placemarks, animated: false)
         }
     }
 
@@ -171,9 +183,7 @@ extension MapViewController: UISearchBarDelegate {
 
 // MARK: UISearchControllerDelegate
 
-extension MapViewController: UISearchControllerDelegate {
-
-}
+extension MapViewController: UISearchControllerDelegate {}
 
 // MARK: UISearchResultsUpdating
 
