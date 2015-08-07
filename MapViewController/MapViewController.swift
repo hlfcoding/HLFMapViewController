@@ -51,10 +51,13 @@ class MapViewController: UIViewController {
         self.searchController = UISearchController(searchResultsController: self.resultsViewController)
         self.searchController.delegate = self
         self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.placeholder = "Search for place or address"
         self.searchController.searchBar.sizeToFit()
+
+        self.definesPresentationContext = true
         self.navigationItem.titleView = self.searchController.searchBar
     }
 
@@ -97,12 +100,14 @@ class MapViewController: UIViewController {
                 print("MKLocalSearch error: \(error)")
                 return
             }
+
+            self.resultsViewController.mapItems = mapItems
+
             self.mapView.removeAnnotations(self.mapView.annotations)
             let placemarks = mapItems.map { (mapItem) -> MKAnnotation in
                 return mapItem.placemark
             }
             self.mapView.showAnnotations(placemarks, animated: true)
-            // TODO: Update resultsViewController.
         }
     }
 
@@ -160,8 +165,6 @@ extension MapViewController: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        guard let text = searchBar.text else { return }
-        self.searchMapItemsWithQuery(text)
     }
 
 }
@@ -177,7 +180,10 @@ extension MapViewController: UISearchControllerDelegate {
 extension MapViewController: UISearchResultsUpdating {
 
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-
+        guard let text = self.searchController.searchBar.text
+              where !text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()).characters.isEmpty
+              else { return }
+        self.searchMapItemsWithQuery(text)
     }
 
 }
@@ -185,5 +191,24 @@ extension MapViewController: UISearchResultsUpdating {
 // MARK: UITableViewDelegate
 
 extension MapViewController: UITableViewDelegate {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        guard tableView === self.resultsViewController.tableView else { return }
+
+        let placemark = self.resultsViewController.mapItems[indexPath.row].placemark
+        self.currentPlacemark = placemark
+
+        self.resultsViewController.dismissViewControllerAnimated(true) {
+
+            if let location = placemark.location {
+                self.zoomToLocation(location, animated: false)
+            }
+
+            if let annotation = self.findMatchingMapViewAnnotation(placemark) {
+                self.mapView.selectAnnotation(annotation, animated: false)
+            }
+
+        }
+    }
 
 }

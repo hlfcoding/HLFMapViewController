@@ -19,6 +19,9 @@
 		E34EA1891B6F5AE100C1FB68 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34EA1881B6F5AE100C1FB68 /* CoreLocation.framework */; };
 		E34EA1911B73619700C1FB68 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34EA18F1B73619700C1FB68 /* SearchResultsViewController.swift */; };
 		E34EA1921B73619700C1FB68 /* SearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34EA1901B73619700C1FB68 /* SearchResultsViewController.xib */; };
+		E34EA1961B7490E700C1FB68 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34EA1951B7490E700C1FB68 /* Contacts.framework */; };
+		E34EA1991B749AA000C1FB68 /* SearchResultsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34EA1971B749AA000C1FB68 /* SearchResultsViewCell.swift */; };
+		E34EA19A1B749AA000C1FB68 /* SearchResultsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E34EA1981B749AA000C1FB68 /* SearchResultsViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		E34EA1881B6F5AE100C1FB68 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E34EA18F1B73619700C1FB68 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		E34EA1901B73619700C1FB68 /* SearchResultsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultsViewController.xib; sourceTree = "<group>"; };
+		E34EA1951B7490E700C1FB68 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		E34EA1971B749AA000C1FB68 /* SearchResultsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewCell.swift; sourceTree = "<group>"; };
+		E34EA1981B749AA000C1FB68 /* SearchResultsViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchResultsViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E34EA1961B7490E700C1FB68 /* Contacts.framework in Frameworks */,
 				E34EA1891B6F5AE100C1FB68 /* CoreLocation.framework in Frameworks */,
 				E34EA1871B6F4FA300C1FB68 /* MapKit.framework in Frameworks */,
 			);
@@ -92,11 +99,13 @@
 		E34EA15E1B6F491200C1FB68 /* MapViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E34EA1831B6F4DBA00C1FB68 /* Example */,
 				E34EA17F1B6F4AA100C1FB68 /* MapViewController.swift */,
-				E34EA1801B6F4AA100C1FB68 /* MapViewController.xib */,
+				E34EA1971B749AA000C1FB68 /* SearchResultsViewCell.swift */,
 				E34EA18F1B73619700C1FB68 /* SearchResultsViewController.swift */,
+				E34EA1801B6F4AA100C1FB68 /* MapViewController.xib */,
+				E34EA1981B749AA000C1FB68 /* SearchResultsViewCell.xib */,
 				E34EA1901B73619700C1FB68 /* SearchResultsViewController.xib */,
+				E34EA1831B6F4DBA00C1FB68 /* Example */,
 			);
 			path = MapViewController;
 			sourceTree = "<group>";
@@ -126,6 +135,7 @@
 		E34EA18A1B6F5AE800C1FB68 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E34EA1951B7490E700C1FB68 /* Contacts.framework */,
 				E34EA1881B6F5AE100C1FB68 /* CoreLocation.framework */,
 				E34EA1861B6F4FA300C1FB68 /* MapKit.framework */,
 			);
@@ -218,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E34EA16A1B6F491200C1FB68 /* LaunchScreen.storyboard in Resources */,
+				E34EA19A1B749AA000C1FB68 /* SearchResultsViewCell.xib in Resources */,
 				E34EA1921B73619700C1FB68 /* SearchResultsViewController.xib in Resources */,
 				E34EA1671B6F491200C1FB68 /* Assets.xcassets in Resources */,
 				E34EA1651B6F491200C1FB68 /* Main.storyboard in Resources */,
@@ -241,6 +252,7 @@
 			files = (
 				E34EA1621B6F491200C1FB68 /* ViewController.swift in Sources */,
 				E34EA1911B73619700C1FB68 /* SearchResultsViewController.swift in Sources */,
+				E34EA1991B749AA000C1FB68 /* SearchResultsViewCell.swift in Sources */,
 				E34EA1811B6F4AA100C1FB68 /* MapViewController.swift in Sources */,
 				E34EA1601B6F491200C1FB68 /* AppDelegate.swift in Sources */,
 			);
