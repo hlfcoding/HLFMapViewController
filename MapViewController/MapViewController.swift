@@ -212,7 +212,11 @@ extension MapViewController: MKMapViewDelegate {
 
         let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         view.canShowCallout = true
+        if let title = annotation.title {
+            view.accessibilityValue = title
+        }
         let selectButton = UIButton(type: .ContactAdd)
+        selectButton.accessibilityLabel = "Select address in callout view"
         view.rightCalloutAccessoryView = selectButton
 
         return view
