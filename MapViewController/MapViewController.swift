@@ -12,32 +12,36 @@ import UIKit
 
 @objc protocol MapViewControllerDelegate: NSObjectProtocol {
 
+    /**
+    When the 'add' button on a MKAnnotationView callout view is tapped,
+    the location represented by the annotation counts as being selected.
+    An `MKMapItem` is wrapped around the annotation.
+    */
     func mapViewController(mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem)
 
 }
 
+/**
+Map modal for searching and selecting a nearby location. This means it
+combines several different Apple API's into one specific (but very
+common) solution: `UISearchController`, `MapKit`, `CoreLocation`.
+*/
 class MapViewController: UIViewController {
 
+    /** Not required, but this view controller is pretty useless without a delegate. */
     weak var delegate: MapViewControllerDelegate?
 
-    @IBOutlet weak var mapLoadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet private weak var mapLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var mapView: MKMapView!
 
+    /** Readonly. */
     var locationManager: CLLocationManager!
+    /** Readonly. */
     var searchController: UISearchController!
+    /** Readonly. */
     var resultsViewController: SearchResultsViewController!
-
+    /** Readonly. Unused internally for now. */
     var currentPlacemark: MKPlacemark?
-
-    init(delegate: MapViewControllerDelegate) {
-        super.init(nibName: "MapViewController", bundle: nil)
-
-        self.delegate = delegate
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +66,13 @@ class MapViewController: UIViewController {
 
     // MARK: Implementation
 
+    /**
+    Initializing `locationManager` means getting user location and
+    setting `showsUserLocation` to true. Request authorization or
+    `handleLocationAuthorizationDenial` if needed.
+
+    See [Getting the User's Location](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/CoreLocation/CoreLocation.html).
+    */
     private func initLocationManager() {
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
@@ -76,6 +87,13 @@ class MapViewController: UIViewController {
         }
     }
 
+    /**
+    Initializing `searchController` means also setting up and providing
+    it our custom `resultsViewController`, as well as updating this view
+    controller to handle be the presentation context for it.
+
+    See [Apple docs](https://developer.apple.com/library/ios/samplecode/TableSearch_UISearchController).
+    */
     private func initSearchController() {
         self.resultsViewController = SearchResultsViewController(nibName: "SearchResultsViewController", bundle: nil)
         self.resultsViewController.tableView.delegate = self
@@ -93,6 +111,10 @@ class MapViewController: UIViewController {
         self.navigationItem.titleView = self.searchController.searchBar
     }
 
+    /**
+    Small helper necessitated by `CLLocationCoordinate2D` not being
+    equatable.
+    */
     private func findMatchingMapViewAnnotation(reference: MKAnnotation) -> MKAnnotation? {
         var match: MKAnnotation?
         for annotation in self.mapView.annotations
@@ -104,6 +126,10 @@ class MapViewController: UIViewController {
         return match
     }
 
+    /**
+    If user denies current location, just present an alert to notify
+    them, and show the map in its default state and require manual zoom.
+    */
     private func handleLocationAuthorizationDenial() {
         let alertController = UIAlertController(
             title: "Understood",
@@ -115,8 +141,12 @@ class MapViewController: UIViewController {
         })
         self.presentViewController(alertController, animated: true, completion: nil)
         self.revealMapView()
+        // TODO: Test usability of search results in this state.
     }
 
+    /**
+    Stop any indicators and fade in `mapView`, but only if needed.
+    */
     private func revealMapView(completion: (() -> Void)? = nil) {
         guard self.mapView.hidden else { return }
 
@@ -132,6 +162,16 @@ class MapViewController: UIViewController {
         }
     }
 
+    /**
+    Main search handler that makes a `MKLocalSearchRequest` and updates
+    `resultsViewController`.
+
+    For now, annotations get updated on `mapView` on search completion,
+    despite latter not being visible. This is to avoid doing more work
+    on dismissal.
+
+    See [Apple docs](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/EnablingSearch/EnablingSearch.html).
+    */
     private func searchMapItemsWithQuery(query: String) {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = query
@@ -154,6 +194,11 @@ class MapViewController: UIViewController {
         }
     }
 
+    /**
+    Basically converts a location to a region with a hard-coded span of
+    `0.03`, and sets it on `mapView`. Yet another helper missing from
+    `MKMapView`.
+    */
     private func zoomToLocation(location: CLLocation, animated: Bool) {
         self.revealMapView()
 
