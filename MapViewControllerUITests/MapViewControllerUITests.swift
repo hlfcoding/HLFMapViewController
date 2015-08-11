@@ -34,7 +34,7 @@ class MapViewControllerUITests: XCTestCase {
         presentButton.tap()
 
         self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: locationAnnotation, handler: nil)
-        self.waitForExpectationsWithTimeout(5.0, handler: nil)
+        self.waitForExpectationsWithTimeout(10.0, handler: nil)
 
         searchField.tap()
         searchField.typeText("Apple Inc., Cupertino")
