@@ -9,7 +9,9 @@
 import XCTest
 
 class MapViewControllerUITests: XCTestCase {
-        
+
+    let existsPredicate = NSPredicate(format: "exists == 1")
+
     override func setUp() {
         super.setUp()
 
@@ -23,8 +25,14 @@ class MapViewControllerUITests: XCTestCase {
     
     func testBasicUserFlow() {
         let app = XCUIApplication()
+        let presentButton = app.buttons["Show Map"]
 
-        app.buttons["Show Map"].tap()
+        presentButton.tap()
+
+        let locationAnnotation = app.otherElements["Current Location"]
+
+        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: locationAnnotation, handler: nil)
+        self.waitForExpectationsWithTimeout(5.0, handler: nil)
 
         let searchField = app.navigationBars["Select Nearby Location"].searchFields["Search for place or address"]
         searchField.tap()
@@ -33,7 +41,8 @@ class MapViewControllerUITests: XCTestCase {
 
         app.buttons["Select address in callout view"].tap()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: presentButton, handler: nil)
+        self.waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
 }
