@@ -13,7 +13,7 @@ class MapViewControllerUITests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        continueAfterFailure = false
+        self.continueAfterFailure = false
         XCUIApplication().launch()
     }
 
@@ -28,8 +28,8 @@ class MapViewControllerUITests: XCTestCase {
 
         let searchField = app.navigationBars["Select Nearby Location"].searchFields["Search for place or address"]
         searchField.tap()
-        searchField.typeText("Ortega Park")
-        app.tables["Search results"].staticTexts["636 Harrow Way, Sunnyvale, CA  94087, United States"].tap()
+        searchField.typeText("Apple Inc., Cupertino")
+        app.tables["Search results"].staticTexts["Apple Inc., 1 Infinite Loop, Cupertino, CA 95014-2083, United States"].tap()
 
         app.buttons["Select address in callout view"].tap()
 
