@@ -26,20 +26,20 @@ class MapViewControllerUITests: XCTestCase {
     func testBasicUserFlow() {
         let app = XCUIApplication()
         let presentButton = app.buttons["Show Map"]
+        let locationAnnotation = app.otherElements["Current Location"]
+        let searchField = app.navigationBars["Select Nearby Location"].searchFields["Search for place or address"]
+        let searchResult = app.tables["Search results"].staticTexts["Apple Inc., 1 Infinite Loop, Cupertino, CA 95014-2083, United States"]
+        let selectButton = app.buttons["Select address in callout view"]
 
         presentButton.tap()
-
-        let locationAnnotation = app.otherElements["Current Location"]
 
         self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: locationAnnotation, handler: nil)
         self.waitForExpectationsWithTimeout(5.0, handler: nil)
 
-        let searchField = app.navigationBars["Select Nearby Location"].searchFields["Search for place or address"]
         searchField.tap()
         searchField.typeText("Apple Inc., Cupertino")
-        app.tables["Search results"].staticTexts["Apple Inc., 1 Infinite Loop, Cupertino, CA 95014-2083, United States"].tap()
-
-        app.buttons["Select address in callout view"].tap()
+        searchResult.tap()
+        selectButton.tap()
 
         self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: presentButton, handler: nil)
         self.waitForExpectationsWithTimeout(2.0, handler: nil)
