@@ -229,6 +229,7 @@ extension MapViewController: CLLocationManagerDelegate {
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == .AuthorizedWhenInUse || status == .AuthorizedAlways {
             self.mapView.showsUserLocation = true
+            self.mapView.setUserTrackingMode(.None, animated: false)
         } else {
             self.handleLocationAuthorizationDenial()
         }
