@@ -19,7 +19,7 @@ mapViewController.delegate = self
 // ...
 
 func mapViewController(mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
-mapViewController.dismissViewControllerAnimated(true, completion: nil)
+    mapViewController.dismissViewControllerAnimated(true, completion: nil)
 }
 ```
 
