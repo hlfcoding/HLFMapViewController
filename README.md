@@ -4,6 +4,8 @@
 [![License](https://img.shields.io/cocoapods/l/HLFMapViewController.svg?style=flat)](http://cocoapods.org/pods/HLFMapViewController)
 [![Platform](https://img.shields.io/cocoapods/p/HLFMapViewController.svg?style=flat)](http://cocoapods.org/pods/HLFMapViewController)
 
+> A generic implementation of a common feature: searching and selecting a nearby location from an `MKMapView`.
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
