@@ -51,7 +51,7 @@ class SearchResultsViewController: UITableViewController {
         if let addressDictionary = mapItem.placemark.addressDictionary,
                addressLines = addressDictionary["FormattedAddressLines"] as? [String]
         {
-            cell.detailTextLabel?.text = ", ".join(addressLines)
+            cell.detailTextLabel?.text = addressLines.joinWithSeparator(", ")
         }
 
         return cell
