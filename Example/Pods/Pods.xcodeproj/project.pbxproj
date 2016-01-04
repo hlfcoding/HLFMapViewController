@@ -1,0 +1,750 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1AFA283365CDB1F93DD78EDB4F7AE6F8 /* Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92DE3EEA5DFFA132AF6EF9A699BF6715 /* Contacts.framework */; };
+		40CB8B6514443A941BA2260D73593C5E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867A67D052E5E0F18298578705FE9F3A /* UIKit.framework */; };
+		47D53B7929F27BC2083C55C24675A50F /* HLFMapViewController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C38F8A3EA396730DA0562DB4B1F1974D /* HLFMapViewController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		48506648842F82207275BFC5E1F94E0B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1862AE5DD8F5B42C9D746DD595FA1B95 /* MapViewController.swift */; };
+		4DB6B9E9B68F8EEE979F251816612899 /* Pods-HLFMapViewController_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 02A08425D9A504EEA0D97785DB9EE378 /* Pods-HLFMapViewController_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5D3832D8FB923FB78925E0A71BABCAE7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5BF1F07C78918E4128261C94EE4BEC /* Foundation.framework */; };
+		60E7ADD8968484D48A2CBF54C5410093 /* Pods-HLFMapViewController_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA8D7E3FA528F9BD17A9EE3CDB7E4199 /* Pods-HLFMapViewController_Tests-dummy.m */; };
+		851529247E492685787CA167AC5D4586 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C710E68F519047D3A332E626CA9D6DF /* MapKit.framework */; };
+		882A03692F823F07076D79FE0144C9B1 /* Pods-HLFMapViewController_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A894B02DA7B19FF5E55790B8144AC0B7 /* Pods-HLFMapViewController_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93A649ABBD6821E0F681F7541C64D9F9 /* SearchResultsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28E04B18007968108B88BA91FB7337AD /* SearchResultsViewController.xib */; };
+		96831340321C852C5CE3E2D9F775AE11 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC9584D11C087FEB5C2E69B48971A33E /* CoreLocation.framework */; };
+		99C5B251495C25EB6AC37004F8464E93 /* Pods-HLFMapViewController_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F2AACCC4D6119C8D810C14E34DB58E /* Pods-HLFMapViewController_Example-dummy.m */; };
+		9F9284BFF334AC5E79A4B43A38AC032A /* HLFMapViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 61094B18C79AF2345BB845CA8ADD1CE6 /* HLFMapViewController-dummy.m */; };
+		AEE11C81FC042A5C36570AAEEA0A4BF6 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB4769BF333F4CC29B210A3FF2EE52B /* SearchResultsViewController.swift */; };
+		B215BE60D93B4C33849C799A45346842 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5BF1F07C78918E4128261C94EE4BEC /* Foundation.framework */; };
+		B6A50B3CAD89011B34A44FC4DF5CDFEC /* SearchResultsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94A87CBB61A6C188DD7A7775FB0F659B /* SearchResultsViewCell.xib */; };
+		BB7DC1FC5D11B7BA4477EF4CA6E7C6DD /* SearchResultsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13E95284B9291BBF620F271EFC236D34 /* SearchResultsViewCell.swift */; };
+		D70D177C3C5C5B0DE7941DA0BE74F093 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5BF1F07C78918E4128261C94EE4BEC /* Foundation.framework */; };
+		DFFD640B07AFE3AA62C1754C9892A260 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4090E0C7534BA64E502BED685B2E0A59 /* MapViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		13CFEF274E9E0632EEDF98A18C1485B9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 420A07484CAEEA7E42ABBAB6B6B300DC;
+			remoteInfo = HLFMapViewController;
+		};
+		E3C5581C170839AB4BD592E6FFDD7B8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 420A07484CAEEA7E42ABBAB6B6B300DC;
+			remoteInfo = HLFMapViewController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02A08425D9A504EEA0D97785DB9EE378 /* Pods-HLFMapViewController_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HLFMapViewController_Example-umbrella.h"; sourceTree = "<group>"; };
+		044EAF50FFC7FF902C6E34688340011F /* Pods_HLFMapViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HLFMapViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		09F2AACCC4D6119C8D810C14E34DB58E /* Pods-HLFMapViewController_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HLFMapViewController_Example-dummy.m"; sourceTree = "<group>"; };
+		13E95284B9291BBF620F271EFC236D34 /* SearchResultsViewCell.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchResultsViewCell.swift; sourceTree = "<group>"; };
+		159D73E159F994DC005D3502BC19D940 /* Pods_HLFMapViewController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HLFMapViewController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1862AE5DD8F5B42C9D746DD595FA1B95 /* MapViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		1AD612E36ADB6C2B7B52AFFFFCD3F4BB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1FF7AC8105D7122482E3AB6FDF72EF0C /* HLFMapViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HLFMapViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		28E04B18007968108B88BA91FB7337AD /* SearchResultsViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = SearchResultsViewController.xib; sourceTree = "<group>"; };
+		2FB9D5D3C569340BAB9C270F582B15DA /* HLFMapViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HLFMapViewController-prefix.pch"; sourceTree = "<group>"; };
+		4090E0C7534BA64E502BED685B2E0A59 /* MapViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		483F5890A42AC8BAA67654F496AC9FA7 /* Pods-HLFMapViewController_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HLFMapViewController_Example-resources.sh"; sourceTree = "<group>"; };
+		4C710E68F519047D3A332E626CA9D6DF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
+		51044A979FA681F1304ABFDEE2F476AC /* Pods-HLFMapViewController_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HLFMapViewController_Tests.modulemap"; sourceTree = "<group>"; };
+		57185ADE507BCC5C1AFA019696BAF6D1 /* HLFMapViewController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = HLFMapViewController.modulemap; sourceTree = "<group>"; };
+		5D4F379E55BE3B2849B94753E78375F5 /* Pods-HLFMapViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HLFMapViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		5EC53D63E9A00292C2E36F0222743A88 /* Pods-HLFMapViewController_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HLFMapViewController_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		61094B18C79AF2345BB845CA8ADD1CE6 /* HLFMapViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HLFMapViewController-dummy.m"; sourceTree = "<group>"; };
+		681C8882FCE3ECC27948B733C8689B86 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C27B57261A665AAB5AD95D37431945B /* Pods-HLFMapViewController_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HLFMapViewController_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		867A67D052E5E0F18298578705FE9F3A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		8D6957B06D31877C0950F7B99F085B63 /* Pods-HLFMapViewController_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HLFMapViewController_Tests-resources.sh"; sourceTree = "<group>"; };
+		92DE3EEA5DFFA132AF6EF9A699BF6715 /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Contacts.framework; sourceTree = DEVELOPER_DIR; };
+		94A87CBB61A6C188DD7A7775FB0F659B /* SearchResultsViewCell.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; path = SearchResultsViewCell.xib; sourceTree = "<group>"; };
+		A894B02DA7B19FF5E55790B8144AC0B7 /* Pods-HLFMapViewController_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-HLFMapViewController_Tests-umbrella.h"; sourceTree = "<group>"; };
+		B01964DA4747CD39718084380F726072 /* Pods-HLFMapViewController_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HLFMapViewController_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		B7CB22AFA134257147DB73C353CD66B5 /* Pods-HLFMapViewController_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-HLFMapViewController_Example-frameworks.sh"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C2384CBD2FE4DC6B4E888FF018D2D87B /* Pods-HLFMapViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HLFMapViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
+		C38F8A3EA396730DA0562DB4B1F1974D /* HLFMapViewController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HLFMapViewController-umbrella.h"; sourceTree = "<group>"; };
+		CC9584D11C087FEB5C2E69B48971A33E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		D28135629FB245F3D332AEB6B99BF8D2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D89F2DE0B09856AB88AD1EAE4A3AFC12 /* Pods-HLFMapViewController_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-HLFMapViewController_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		E2FAF157B6BC3106B876D935A78BF9E9 /* Pods-HLFMapViewController_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-HLFMapViewController_Example.modulemap"; sourceTree = "<group>"; };
+		E51B1B5D2806A327207DC09B751DC6D8 /* Pods-HLFMapViewController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HLFMapViewController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		E874F99D7E032029C7263529B3C49E12 /* Pods-HLFMapViewController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-HLFMapViewController_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		EA8D7E3FA528F9BD17A9EE3CDB7E4199 /* Pods-HLFMapViewController_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-HLFMapViewController_Tests-dummy.m"; sourceTree = "<group>"; };
+		EAB4769BF333F4CC29B210A3FF2EE52B /* SearchResultsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		FACB4A5FE6A09A1B7894196334C960C9 /* Pods-HLFMapViewController_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-HLFMapViewController_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		FD5BF1F07C78918E4128261C94EE4BEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		FF375E615DA110A018E6A1AEAC908DD0 /* HLFMapViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HLFMapViewController.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		50B6845320D56979D36A1595A185E025 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D3832D8FB923FB78925E0A71BABCAE7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		95B4476173F65BB1E5C44953F5F7659E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D70D177C3C5C5B0DE7941DA0BE74F093 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A501863FEAD266520F21866A3066F163 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AFA283365CDB1F93DD78EDB4F7AE6F8 /* Contacts.framework in Frameworks */,
+				96831340321C852C5CE3E2D9F775AE11 /* CoreLocation.framework in Frameworks */,
+				B215BE60D93B4C33849C799A45346842 /* Foundation.framework in Frameworks */,
+				851529247E492685787CA167AC5D4586 /* MapKit.framework in Frameworks */,
+				40CB8B6514443A941BA2260D73593C5E /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		11DC103573E1755C5A3C0F696BFEDA57 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				27244A56BBC7C5E8C54AC84F9A41F4C5 /* Pods-HLFMapViewController_Example */,
+				EAE58A1273E9A4AC666CB2FA614AFD62 /* Pods-HLFMapViewController_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		20B56609144CE204DFA8221F742B2D76 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				99DB4768003438D1197EDD16C429C427 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		238CD5B9B1A3BAFEAD79E4BC70FFB163 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				57185ADE507BCC5C1AFA019696BAF6D1 /* HLFMapViewController.modulemap */,
+				FF375E615DA110A018E6A1AEAC908DD0 /* HLFMapViewController.xcconfig */,
+				61094B18C79AF2345BB845CA8ADD1CE6 /* HLFMapViewController-dummy.m */,
+				2FB9D5D3C569340BAB9C270F582B15DA /* HLFMapViewController-prefix.pch */,
+				C38F8A3EA396730DA0562DB4B1F1974D /* HLFMapViewController-umbrella.h */,
+				1AD612E36ADB6C2B7B52AFFFFCD3F4BB /* Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/HLFMapViewController";
+			sourceTree = "<group>";
+		};
+		265EDC9CA52BEF7A10CBC28C4022F781 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				925F8B01630C8440C5EAC9989E332677 /* HLFMapViewController */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		27244A56BBC7C5E8C54AC84F9A41F4C5 /* Pods-HLFMapViewController_Example */ = {
+			isa = PBXGroup;
+			children = (
+				D28135629FB245F3D332AEB6B99BF8D2 /* Info.plist */,
+				E2FAF157B6BC3106B876D935A78BF9E9 /* Pods-HLFMapViewController_Example.modulemap */,
+				D89F2DE0B09856AB88AD1EAE4A3AFC12 /* Pods-HLFMapViewController_Example-acknowledgements.markdown */,
+				FACB4A5FE6A09A1B7894196334C960C9 /* Pods-HLFMapViewController_Example-acknowledgements.plist */,
+				09F2AACCC4D6119C8D810C14E34DB58E /* Pods-HLFMapViewController_Example-dummy.m */,
+				B7CB22AFA134257147DB73C353CD66B5 /* Pods-HLFMapViewController_Example-frameworks.sh */,
+				483F5890A42AC8BAA67654F496AC9FA7 /* Pods-HLFMapViewController_Example-resources.sh */,
+				02A08425D9A504EEA0D97785DB9EE378 /* Pods-HLFMapViewController_Example-umbrella.h */,
+				5D4F379E55BE3B2849B94753E78375F5 /* Pods-HLFMapViewController_Example.debug.xcconfig */,
+				C2384CBD2FE4DC6B4E888FF018D2D87B /* Pods-HLFMapViewController_Example.release.xcconfig */,
+			);
+			name = "Pods-HLFMapViewController_Example";
+			path = "Target Support Files/Pods-HLFMapViewController_Example";
+			sourceTree = "<group>";
+		};
+		3DE84CDD656917000F145DEDEB10635E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1862AE5DD8F5B42C9D746DD595FA1B95 /* MapViewController.swift */,
+				13E95284B9291BBF620F271EFC236D34 /* SearchResultsViewCell.swift */,
+				EAB4769BF333F4CC29B210A3FF2EE52B /* SearchResultsViewController.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		4B16596C747A65DAC0AAE95F5F6D44FB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				4090E0C7534BA64E502BED685B2E0A59 /* MapViewController.xib */,
+				94A87CBB61A6C188DD7A7775FB0F659B /* SearchResultsViewCell.xib */,
+				28E04B18007968108B88BA91FB7337AD /* SearchResultsViewController.xib */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		4FEB54DE1DBF2523CF784CA4A4CD1C13 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				4B16596C747A65DAC0AAE95F5F6D44FB /* Assets */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				265EDC9CA52BEF7A10CBC28C4022F781 /* Development Pods */,
+				20B56609144CE204DFA8221F742B2D76 /* Frameworks */,
+				EF708DE1A403C8B524BCC70F3550C721 /* Products */,
+				11DC103573E1755C5A3C0F696BFEDA57 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		925F8B01630C8440C5EAC9989E332677 /* HLFMapViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E97474AC20C27A0367A82103E1A801A2 /* Pod */,
+				C2BCF3D220CE19432A3C3BB8157B8338 /* Resources */,
+				238CD5B9B1A3BAFEAD79E4BC70FFB163 /* Support Files */,
+			);
+			name = HLFMapViewController;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		99DB4768003438D1197EDD16C429C427 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				92DE3EEA5DFFA132AF6EF9A699BF6715 /* Contacts.framework */,
+				CC9584D11C087FEB5C2E69B48971A33E /* CoreLocation.framework */,
+				FD5BF1F07C78918E4128261C94EE4BEC /* Foundation.framework */,
+				4C710E68F519047D3A332E626CA9D6DF /* MapKit.framework */,
+				867A67D052E5E0F18298578705FE9F3A /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		C2BCF3D220CE19432A3C3BB8157B8338 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4FEB54DE1DBF2523CF784CA4A4CD1C13 /* Pod */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E97474AC20C27A0367A82103E1A801A2 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				3DE84CDD656917000F145DEDEB10635E /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		EAE58A1273E9A4AC666CB2FA614AFD62 /* Pods-HLFMapViewController_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				681C8882FCE3ECC27948B733C8689B86 /* Info.plist */,
+				51044A979FA681F1304ABFDEE2F476AC /* Pods-HLFMapViewController_Tests.modulemap */,
+				7C27B57261A665AAB5AD95D37431945B /* Pods-HLFMapViewController_Tests-acknowledgements.markdown */,
+				5EC53D63E9A00292C2E36F0222743A88 /* Pods-HLFMapViewController_Tests-acknowledgements.plist */,
+				EA8D7E3FA528F9BD17A9EE3CDB7E4199 /* Pods-HLFMapViewController_Tests-dummy.m */,
+				B01964DA4747CD39718084380F726072 /* Pods-HLFMapViewController_Tests-frameworks.sh */,
+				8D6957B06D31877C0950F7B99F085B63 /* Pods-HLFMapViewController_Tests-resources.sh */,
+				A894B02DA7B19FF5E55790B8144AC0B7 /* Pods-HLFMapViewController_Tests-umbrella.h */,
+				E51B1B5D2806A327207DC09B751DC6D8 /* Pods-HLFMapViewController_Tests.debug.xcconfig */,
+				E874F99D7E032029C7263529B3C49E12 /* Pods-HLFMapViewController_Tests.release.xcconfig */,
+			);
+			name = "Pods-HLFMapViewController_Tests";
+			path = "Target Support Files/Pods-HLFMapViewController_Tests";
+			sourceTree = "<group>";
+		};
+		EF708DE1A403C8B524BCC70F3550C721 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1FF7AC8105D7122482E3AB6FDF72EF0C /* HLFMapViewController.framework */,
+				044EAF50FFC7FF902C6E34688340011F /* Pods_HLFMapViewController_Example.framework */,
+				159D73E159F994DC005D3502BC19D940 /* Pods_HLFMapViewController_Tests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		08AC3C38EAA1C5B24DB1E9BD3609BB85 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DB6B9E9B68F8EEE979F251816612899 /* Pods-HLFMapViewController_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81759ADA9C0DECF6A2709AC084C67932 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				882A03692F823F07076D79FE0144C9B1 /* Pods-HLFMapViewController_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B00D614DA4B028A3DCC125898F16F83D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47D53B7929F27BC2083C55C24675A50F /* HLFMapViewController-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		37462BAC7E197D883EB21B6F75B65379 /* Pods-HLFMapViewController_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 382C3AA7B0916DE8AC217F9E9858D3DA /* Build configuration list for PBXNativeTarget "Pods-HLFMapViewController_Tests" */;
+			buildPhases = (
+				9AC4B8A44734A486BC4FBF45BC24E40D /* Sources */,
+				95B4476173F65BB1E5C44953F5F7659E /* Frameworks */,
+				81759ADA9C0DECF6A2709AC084C67932 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C64266D8B9E940B63BE96C42EF89890 /* PBXTargetDependency */,
+			);
+			name = "Pods-HLFMapViewController_Tests";
+			productName = "Pods-HLFMapViewController_Tests";
+			productReference = 159D73E159F994DC005D3502BC19D940 /* Pods_HLFMapViewController_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		420A07484CAEEA7E42ABBAB6B6B300DC /* HLFMapViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 797CDD54ECF9634941DFC8CCCACEAD27 /* Build configuration list for PBXNativeTarget "HLFMapViewController" */;
+			buildPhases = (
+				2798D9337FA2B1BB854F598C907BB20D /* Sources */,
+				A501863FEAD266520F21866A3066F163 /* Frameworks */,
+				C3200C98B6905CA4BE46A052DE4310F7 /* Resources */,
+				B00D614DA4B028A3DCC125898F16F83D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HLFMapViewController;
+			productName = HLFMapViewController;
+			productReference = 1FF7AC8105D7122482E3AB6FDF72EF0C /* HLFMapViewController.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		815D6253D310F57789C0F01940198B4A /* Pods-HLFMapViewController_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 720C78CA4C8FAE3BFC0975CAC5B247D6 /* Build configuration list for PBXNativeTarget "Pods-HLFMapViewController_Example" */;
+			buildPhases = (
+				7A42F2F2D387A5F3DB458D02499C8CA3 /* Sources */,
+				50B6845320D56979D36A1595A185E025 /* Frameworks */,
+				08AC3C38EAA1C5B24DB1E9BD3609BB85 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F9DB299A666CE1D7F8DFF544D5C7EB8D /* PBXTargetDependency */,
+			);
+			name = "Pods-HLFMapViewController_Example";
+			productName = "Pods-HLFMapViewController_Example";
+			productReference = 044EAF50FFC7FF902C6E34688340011F /* Pods_HLFMapViewController_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = EF708DE1A403C8B524BCC70F3550C721 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				420A07484CAEEA7E42ABBAB6B6B300DC /* HLFMapViewController */,
+				815D6253D310F57789C0F01940198B4A /* Pods-HLFMapViewController_Example */,
+				37462BAC7E197D883EB21B6F75B65379 /* Pods-HLFMapViewController_Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C3200C98B6905CA4BE46A052DE4310F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFFD640B07AFE3AA62C1754C9892A260 /* MapViewController.xib in Resources */,
+				B6A50B3CAD89011B34A44FC4DF5CDFEC /* SearchResultsViewCell.xib in Resources */,
+				93A649ABBD6821E0F681F7541C64D9F9 /* SearchResultsViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2798D9337FA2B1BB854F598C907BB20D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F9284BFF334AC5E79A4B43A38AC032A /* HLFMapViewController-dummy.m in Sources */,
+				48506648842F82207275BFC5E1F94E0B /* MapViewController.swift in Sources */,
+				BB7DC1FC5D11B7BA4477EF4CA6E7C6DD /* SearchResultsViewCell.swift in Sources */,
+				AEE11C81FC042A5C36570AAEEA0A4BF6 /* SearchResultsViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7A42F2F2D387A5F3DB458D02499C8CA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99C5B251495C25EB6AC37004F8464E93 /* Pods-HLFMapViewController_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9AC4B8A44734A486BC4FBF45BC24E40D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60E7ADD8968484D48A2CBF54C5410093 /* Pods-HLFMapViewController_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C64266D8B9E940B63BE96C42EF89890 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HLFMapViewController;
+			target = 420A07484CAEEA7E42ABBAB6B6B300DC /* HLFMapViewController */;
+			targetProxy = E3C5581C170839AB4BD592E6FFDD7B8D /* PBXContainerItemProxy */;
+		};
+		F9DB299A666CE1D7F8DFF544D5C7EB8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HLFMapViewController;
+			target = 420A07484CAEEA7E42ABBAB6B6B300DC /* HLFMapViewController */;
+			targetProxy = 13CFEF274E9E0632EEDF98A18C1485B9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		14E4E1ED95661080151E6E1D3FED1964 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2384CBD2FE4DC6B4E888FF018D2D87B /* Pods-HLFMapViewController_Example.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-HLFMapViewController_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HLFMapViewController_Example/Pods-HLFMapViewController_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_HLFMapViewController_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		552D02D5BA751AC2E8790D2811D496CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		8378CA0AB5555EC7872A59FFB23D8B19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF375E615DA110A018E6A1AEAC908DD0 /* HLFMapViewController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HLFMapViewController/HLFMapViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HLFMapViewController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/HLFMapViewController/HLFMapViewController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = HLFMapViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9DA7C6AD68E4BCFE213E6D391F2D8372 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF375E615DA110A018E6A1AEAC908DD0 /* HLFMapViewController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HLFMapViewController/HLFMapViewController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/HLFMapViewController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/HLFMapViewController/HLFMapViewController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = HLFMapViewController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A2C3CC3F1D92D52E4859D6C16344426B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E874F99D7E032029C7263529B3C49E12 /* Pods-HLFMapViewController_Tests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-HLFMapViewController_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HLFMapViewController_Tests/Pods-HLFMapViewController_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_HLFMapViewController_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C76DD43680FBD163C4226E838BFE8E77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D4F379E55BE3B2849B94753E78375F5 /* Pods-HLFMapViewController_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-HLFMapViewController_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HLFMapViewController_Example/Pods-HLFMapViewController_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_HLFMapViewController_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		ECC86693D44462BDC589AC668BE238A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E51B1B5D2806A327207DC09B751DC6D8 /* Pods-HLFMapViewController_Tests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-HLFMapViewController_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-HLFMapViewController_Tests/Pods-HLFMapViewController_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_HLFMapViewController_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				552D02D5BA751AC2E8790D2811D496CA /* Debug */,
+				10DE1947DAC0ED28F6C0A9F9BD75D546 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		382C3AA7B0916DE8AC217F9E9858D3DA /* Build configuration list for PBXNativeTarget "Pods-HLFMapViewController_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ECC86693D44462BDC589AC668BE238A2 /* Debug */,
+				A2C3CC3F1D92D52E4859D6C16344426B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		720C78CA4C8FAE3BFC0975CAC5B247D6 /* Build configuration list for PBXNativeTarget "Pods-HLFMapViewController_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C76DD43680FBD163C4226E838BFE8E77 /* Debug */,
+				14E4E1ED95661080151E6E1D3FED1964 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		797CDD54ECF9634941DFC8CCCACEAD27 /* Build configuration list for PBXNativeTarget "HLFMapViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9DA7C6AD68E4BCFE213E6D391F2D8372 /* Debug */,
+				8378CA0AB5555EC7872A59FFB23D8B19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}
