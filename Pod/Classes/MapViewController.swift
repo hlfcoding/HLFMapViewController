@@ -158,9 +158,7 @@ import UIKit
         self.mapView.hidden = false
         UIView.animateWithDuration(0.3) {
             self.mapView.alpha = 1.0
-            if let completion = completion {
-                completion()
-            }
+            completion?()
         }
     }
 
@@ -189,9 +187,7 @@ import UIKit
             self.resultsViewController.mapItems = mapItems
 
             self.mapView.removeAnnotations(self.mapView.annotations)
-            let placemarks = mapItems.map { (mapItem) -> MKAnnotation in
-                return mapItem.placemark
-            }
+            let placemarks = mapItems.map { $0.placemark }
             self.mapView.showAnnotations(placemarks, animated: false)
         }
     }
