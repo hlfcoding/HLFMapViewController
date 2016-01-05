@@ -121,7 +121,7 @@ import UIKit
         var match: MKAnnotation?
         for annotation in self.mapView.annotations
             where annotation.coordinate.latitude == reference.coordinate.latitude &&
-                annotation.coordinate.longitude == reference.coordinate.longitude
+                  annotation.coordinate.longitude == reference.coordinate.longitude
         {
             match = annotation
         }
@@ -140,7 +140,7 @@ import UIKit
         )
         alertController.addAction(UIAlertAction(title: "OK", style: .Default) { (action) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
-            })
+        })
         self.presentViewController(alertController, animated: true, completion: nil)
         self.revealMapView()
         // TODO: Test usability of search results in this state.

@@ -49,7 +49,7 @@ import UIKit
 
         cell.textLabel?.text = mapItem.name
         if let addressDictionary = mapItem.placemark.addressDictionary,
-            addressLines = addressDictionary["FormattedAddressLines"] as? [String]
+               addressLines = addressDictionary["FormattedAddressLines"] as? [String]
         {
             cell.detailTextLabel?.text = addressLines.joinWithSeparator(", ")
         }
