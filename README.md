@@ -18,7 +18,7 @@ Other than that just set up the view controller and implement the delegate metho
 
 ```swift
 // ...
-let mapViewController = MapViewController(nibName: "HLFMapViewController", bundle: MapViewController.bundle)
+let mapViewController = MapViewController(nibName: "MapViewController", bundle: MapViewController.bundle)
 mapViewController.delegate = self
 // ...
 
