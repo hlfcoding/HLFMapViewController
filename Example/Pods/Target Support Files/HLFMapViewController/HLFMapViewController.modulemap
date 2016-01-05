@@ -1,6 +1,0 @@
-framework module HLFMapViewController {
-  umbrella header "HLFMapViewController-umbrella.h"
-
-  export *
-  module * { export * }
-}

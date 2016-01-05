@@ -1,6 +1,0 @@
-framework module Pods_HLFMapViewController_Example {
-  umbrella header "Pods-HLFMapViewController_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
