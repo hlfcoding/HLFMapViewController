@@ -6,8 +6,7 @@
 
 > A generic implementation of a common feature: searching and selecting a nearby location from an `MKMapView`.
 
-![screenshot-1](https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-1.png)
-![screenshot-2](https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-2.png)
+![screenshot-1](https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-1.png) &emsp;&emsp;![screenshot-2](https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-2.png)
 
 ## Usage
 
