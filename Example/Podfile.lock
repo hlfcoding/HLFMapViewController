@@ -1,5 +1,5 @@
 PODS:
-  - HLFMapViewController (0.1.3)
+  - HLFMapViewController (0.2.0)
 
 DEPENDENCIES:
   - HLFMapViewController (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  HLFMapViewController: 0ed3d6d324c8ca855b40bb699bc74a8459860c39
+  HLFMapViewController: 7dd18eeac0dbefc51cdd066cac6498193c1775da
 
 COCOAPODS: 0.39.0

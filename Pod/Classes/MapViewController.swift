@@ -36,14 +36,10 @@ import UIKit
     @IBOutlet public weak var mapLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet public weak var mapView: MKMapView!
 
-    /** Readonly. */
-    public var locationManager: CLLocationManager!
-    /** Readonly. */
-    public var searchController: UISearchController!
-    /** Readonly. */
-    public var resultsViewController: SearchResultsViewController!
-    /** Readonly. Unused internally for now. */
-    var currentPlacemark: MKPlacemark?
+    public private(set) var locationManager: CLLocationManager!
+    public private(set) var searchController: UISearchController!
+    public private(set) var resultsViewController: SearchResultsViewController!
+    public private(set) var currentPlacemark: MKPlacemark?
 
     override public func viewDidLoad() {
         super.viewDidLoad()

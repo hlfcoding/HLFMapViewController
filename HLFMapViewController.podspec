@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "HLFMapViewController"
-  s.version          = "0.1.3"
+  s.version          = "0.2.0"
   s.summary          = "Map modal for searching and selecting a nearby location."
   s.description      = <<-DESC
                        A generic implementation of a common feature: searching
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/hlfcoding/HLFMapViewController.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/hlfcoding'
 
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '9.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
