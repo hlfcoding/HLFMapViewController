@@ -40,6 +40,7 @@
                 </constraints>
                 <edgeInsets key="layoutMargins" top="12" left="15" bottom="10" right="15"/>
             </tableViewCellContentView>
+            <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             <connections>
                 <outlet property="customDetailTextLabel" destination="VRJ-12-aXo" id="hlf-00-001"/>
                 <outlet property="customTextLabel" destination="rb4-wu-q8I" id="hlf-00-000"/>
