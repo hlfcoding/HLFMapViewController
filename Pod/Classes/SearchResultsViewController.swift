@@ -10,8 +10,24 @@ import Contacts
 import MapKit
 import UIKit
 
+@objc(HLFSearchResultsViewControllerDelegate) public protocol SearchResultsViewControllerDelegate: NSObjectProtocol {
+
+    /**
+     When the cell is dequeued and initially given content, this method
+     will be called to allow additional customization of the cell, for
+     example, its `layoutMargins` and label colors and font sizes.
+     */
+    optional func resultsViewController(resultsViewController: SearchResultsViewController,
+                                        didConfigureResultViewCell cell: SearchResultsViewCell,
+                                        withMapItem mapItem: MKMapItem)
+
+}
+
+
 @objc(HLFSearchResultsViewController) final public class SearchResultsViewController: UITableViewController {
 
+    /** Not required, but this view controller is pretty useless without a delegate. */
+    public weak var delegate: SearchResultsViewControllerDelegate?
 
     public var mapItems: [MKMapItem] = [] {
         didSet {
@@ -22,13 +38,6 @@ import UIKit
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-
-        // Update cell layout. (1/2)
-        /*
-        self.tableView.rowHeight = 50
-        */
-        self.tableView.separatorInset = UIEdgeInsetsZero
-        self.tableView.contentInset = UIEdgeInsetsZero
         self.tableView.registerClass(SearchResultsViewCell.self, forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier)
         self.tableView.registerNib(UINib(nibName: "SearchResultsViewCell", bundle: MapViewController.bundle), forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier)
     }
@@ -61,13 +70,7 @@ import UIKit
             cell.customDetailTextLabel.text = addressLines.joinWithSeparator(", ")
         }
 
-        // Update cell layout. (2/2)
-        /*
-        let original = cell.contentView.layoutMargins
-        cell.contentView.layoutMargins = UIEdgeInsets(
-            top: 15.0, left: original.left, bottom: 15.0, right: original.right
-        )
-        */
+        self.delegate?.resultsViewController?(self, didConfigureResultViewCell: cell, withMapItem: mapItem)
 
         return cell
     }

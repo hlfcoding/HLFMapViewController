@@ -28,5 +28,15 @@ class ViewController: UIViewController, MapViewControllerDelegate {
         mapViewController.dismissViewControllerAnimated(true, completion: nil)
     }
 
+    func resultsViewController(resultsViewController: SearchResultsViewController,
+                               didConfigureResultViewCell cell: SearchResultsViewCell, withMapItem mapItem: MKMapItem)
+    {
+        resultsViewController.tableView.rowHeight = 50
+
+        var customMargins = cell.contentView.layoutMargins
+        customMargins.top = 15.0
+        customMargins.bottom = 15.0
+        cell.contentView.layoutMargins = customMargins
+    }
 }
 

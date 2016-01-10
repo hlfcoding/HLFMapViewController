@@ -10,7 +10,7 @@ import CoreLocation
 import MapKit
 import UIKit
 
-@objc(HLFMapViewControllerDelegate) public protocol MapViewControllerDelegate: NSObjectProtocol {
+@objc(HLFMapViewControllerDelegate) public protocol MapViewControllerDelegate: SearchResultsViewControllerDelegate {
 
     /**
      When the 'add' button on a MKAnnotationView callout view is tapped,
@@ -94,6 +94,7 @@ import UIKit
      */
     private func initSearchController() {
         self.resultsViewController = SearchResultsViewController(nibName: "SearchResultsViewController", bundle: MapViewController.bundle)
+        self.resultsViewController.delegate = self.delegate
         self.resultsViewController.tableView.delegate = self
 
         self.searchController = UISearchController(searchResultsController: self.resultsViewController)
