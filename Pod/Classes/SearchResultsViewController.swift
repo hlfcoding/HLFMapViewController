@@ -25,6 +25,13 @@ import UIKit
 
         self.tableView.registerClass(SearchResultsViewCell.self, forCellReuseIdentifier: self.cellReuseIdentifier)
         self.tableView.registerNib(UINib(nibName: "SearchResultsViewCell", bundle: MapViewController.bundle), forCellReuseIdentifier: self.cellReuseIdentifier)
+
+        // Update cell layout. (1/2)
+        /*
+        self.tableView.rowHeight = 50
+        */
+        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.contentInset = UIEdgeInsetsZero
     }
 
     override public func didReceiveMemoryWarning() {
@@ -44,16 +51,25 @@ import UIKit
     }
 
     override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellReuseIdentifier, forIndexPath: indexPath)
-        let mapItem = self.mapItems[indexPath.row]
+        let someCell = tableView.dequeueReusableCellWithIdentifier(self.cellReuseIdentifier, forIndexPath: indexPath)
+        guard let cell = someCell as? SearchResultsViewCell else { return someCell }
 
-        cell.textLabel?.text = mapItem.name
+        let mapItem = self.mapItems[indexPath.row]
+        cell.customTextLabel.text = mapItem.name
         if let addressDictionary = mapItem.placemark.addressDictionary,
                addressLines = addressDictionary["FormattedAddressLines"] as? [String]
         {
-            cell.detailTextLabel?.text = addressLines.joinWithSeparator(", ")
+            cell.customDetailTextLabel.text = addressLines.joinWithSeparator(", ")
         }
-        
+
+        // Update cell layout. (2/2)
+        /*
+        let original = cell.contentView.layoutMargins
+        cell.contentView.layoutMargins = UIEdgeInsets(
+            top: 15.0, left: original.left, bottom: 15.0, right: original.right
+        )
+        */
+
         return cell
     }
     
