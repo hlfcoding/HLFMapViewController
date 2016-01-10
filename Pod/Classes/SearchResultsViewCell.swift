@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc(HLFSearchResultsViewCell) public class SearchResultsViewCell: UITableViewCell {
+@objc(HLFSearchResultsViewCell) final public class SearchResultsViewCell: UITableViewCell {
 
     @IBOutlet public weak var customTextLabel: UILabel!
     @IBOutlet public weak var customDetailTextLabel: UILabel!

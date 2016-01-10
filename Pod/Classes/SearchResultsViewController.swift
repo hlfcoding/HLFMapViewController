@@ -10,7 +10,7 @@ import Contacts
 import MapKit
 import UIKit
 
-@objc(HLFSearchResultsViewController) public class SearchResultsViewController: UITableViewController {
+@objc(HLFSearchResultsViewController) final public class SearchResultsViewController: UITableViewController {
 
     let cellReuseIdentifier = "searchResult"
 
