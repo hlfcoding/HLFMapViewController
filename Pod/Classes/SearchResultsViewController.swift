@@ -12,7 +12,6 @@ import UIKit
 
 @objc(HLFSearchResultsViewController) final public class SearchResultsViewController: UITableViewController {
 
-    let cellReuseIdentifier = "searchResult"
 
     public var mapItems: [MKMapItem] = [] {
         didSet {
@@ -23,8 +22,6 @@ import UIKit
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(SearchResultsViewCell.self, forCellReuseIdentifier: self.cellReuseIdentifier)
-        self.tableView.registerNib(UINib(nibName: "SearchResultsViewCell", bundle: MapViewController.bundle), forCellReuseIdentifier: self.cellReuseIdentifier)
 
         // Update cell layout. (1/2)
         /*
@@ -32,6 +29,8 @@ import UIKit
         */
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.contentInset = UIEdgeInsetsZero
+        self.tableView.registerClass(SearchResultsViewCell.self, forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier)
+        self.tableView.registerNib(UINib(nibName: "SearchResultsViewCell", bundle: MapViewController.bundle), forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier)
     }
 
     override public func didReceiveMemoryWarning() {
@@ -51,7 +50,7 @@ import UIKit
     }
 
     override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let someCell = tableView.dequeueReusableCellWithIdentifier(self.cellReuseIdentifier, forIndexPath: indexPath)
+        let someCell = tableView.dequeueReusableCellWithIdentifier(SearchResultsViewCell.reuseIdentifier, forIndexPath: indexPath)
         guard let cell = someCell as? SearchResultsViewCell else { return someCell }
 
         let mapItem = self.mapItems[indexPath.row]
