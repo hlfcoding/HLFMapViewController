@@ -27,6 +27,8 @@ func mapViewController(mapViewController: MapViewController, didSelectMapItem ma
 }
 ```
 
+See [example app](//github.com/hlfcoding/HLFMapViewController/blob/master/Example/HLFMapViewController/ViewController.swift) for more details.
+
 ## Installation
 
 HLFMapViewController is available through [CocoaPods](http://cocoapods.org). To install
