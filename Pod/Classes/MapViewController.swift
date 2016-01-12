@@ -251,16 +251,15 @@ extension MapViewController: MKMapViewDelegate {
             return dequeued
         }
 
-        let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        view.canShowCallout = true
-        if let title = annotation.title {
-            view.accessibilityValue = title
-        }
+        let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        pinView.canShowCallout = true
+        pinView.accessibilityValue = annotation.title ?? "An unknown location"
+
         let selectButton = UIButton(type: .ContactAdd)
         selectButton.accessibilityLabel = "Select address in callout view"
-        view.rightCalloutAccessoryView = selectButton
+        pinView.rightCalloutAccessoryView = selectButton
 
-        return view
+        return pinView
     }
 
     public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView,
@@ -323,5 +322,5 @@ extension MapViewController: UITableViewDelegate {
             
         }
     }
-    
+
 }
