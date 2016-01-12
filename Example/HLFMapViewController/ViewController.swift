@@ -13,16 +13,19 @@ import HLFMapViewController
 
 class ViewController: UIViewController, MapViewControllerDelegate {
 
+    var selectedMapItem: MKMapItem?
+
     @IBAction func showMap(sender: AnyObject) {
         let mapViewController = MapViewController(nibName: "MapViewController", bundle: MapViewController.bundle)
         mapViewController.title = NSLocalizedString("Select Nearby Location", comment: "")
         mapViewController.delegate = self
+        mapViewController.selectedMapItem = self.selectedMapItem
 
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
 
     func mapViewController(mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
-        print(mapItem)
+        self.selectedMapItem = mapItem
 
         self.navigationController?.popToViewController(self, animated: true)
     }

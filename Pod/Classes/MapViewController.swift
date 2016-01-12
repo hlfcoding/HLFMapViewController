@@ -39,7 +39,7 @@ import UIKit
     public private(set) var locationManager: CLLocationManager!
     public private(set) var searchController: UISearchController!
     public private(set) var resultsViewController: SearchResultsViewController!
-    public private(set) var currentPlacemark: MKPlacemark?
+    public var selectedMapItem: MKMapItem?
 
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -239,6 +239,11 @@ extension MapViewController: MKMapViewDelegate {
     public func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         guard let location = userLocation.location else { return }
         self.zoomToLocation(location, animated: false)
+
+        if let placemark = self.selectedMapItem?.placemark {
+            self.mapView.showAnnotations([placemark], animated: false)
+            self.mapView.selectAnnotation(placemark, animated: false)
+        }
     }
 
     public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -307,16 +312,16 @@ extension MapViewController: UITableViewDelegate {
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         guard tableView === self.resultsViewController.tableView else { return }
 
-        let placemark = self.resultsViewController.mapItems[indexPath.row].placemark
-        self.currentPlacemark = placemark
+        let mapItem = self.resultsViewController.mapItems[indexPath.row]
+        self.selectedMapItem = mapItem
 
         self.resultsViewController.dismissViewControllerAnimated(true) {
 
-            if let location = placemark.location {
+            if let location = mapItem.placemark.location {
                 self.zoomToLocation(location, animated: false)
             }
             
-            if let annotation = self.findMatchingMapViewAnnotation(placemark) {
+            if let annotation = self.findMatchingMapViewAnnotation(mapItem.placemark) {
                 self.mapView.selectAnnotation(annotation, animated: false)
             }
             

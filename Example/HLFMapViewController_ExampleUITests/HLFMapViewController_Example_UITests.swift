@@ -26,23 +26,28 @@ class HLFMapViewController_Example_UITests: XCTestCase {
     func testBasicUserFlow() {
         let app = XCUIApplication()
         let presentButton = app.buttons["Show Map"]
-        let locationAnnotation = app.otherElements["Current Location"]
+        let userLocation = app.otherElements["Current Location"]
         let searchField = app.navigationBars["Select Nearby Location"].searchFields["Search for place or address"]
         let searchResult = app.tables["Search results"].staticTexts["Apple Inc., 1 Infinite Loop, Cupertino, CA 95014-2083, United States"]
-        let selectButton = app.buttons["Select address in callout view"]
+        let selectedLocationButton = app.buttons["Select address in callout view"]
 
         presentButton.tap()
 
-        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: locationAnnotation, handler: nil)
+        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: userLocation, handler: nil)
         self.waitForExpectationsWithTimeout(10.0, handler: nil)
 
         searchField.tap()
         searchField.typeText("Apple Inc., Cupertino")
         searchResult.tap()
-        selectButton.tap()
+        selectedLocationButton.tap()
 
         self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: presentButton, handler: nil)
         self.waitForExpectationsWithTimeout(2.0, handler: nil)
+
+        presentButton.tap()
+
+        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: selectedLocationButton, handler: nil)
+        self.waitForExpectationsWithTimeout(10.0, handler: nil)
     }
 
 }
