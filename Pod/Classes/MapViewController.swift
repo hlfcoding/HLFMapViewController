@@ -182,6 +182,7 @@ import UIKit
                 return
             }
 
+            guard mapItems != self.resultsViewController.mapItems else { return }
             self.resultsViewController.mapItems = mapItems
 
             self.mapView.removeAnnotations(self.mapView.annotations)
@@ -323,7 +324,11 @@ extension MapViewController: UITableViewDelegate {
             }
             
             if let annotation = self.findMatchingMapViewAnnotation(mapItem.placemark) {
-                self.mapView.selectAnnotation(annotation, animated: false)
+                // zoomToLocation calls setRegion, which seems to take until the next run loop,
+                // and if we don't wait until it's fully done, it may reset the annotation selection.
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.mapView.selectAnnotation(annotation, animated: false)
+                }
             }
             
         }
