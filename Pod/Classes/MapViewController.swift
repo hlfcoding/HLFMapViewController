@@ -94,6 +94,7 @@ import UIKit
      */
     private func initSearchController() {
         self.resultsViewController = SearchResultsViewController(nibName: "SearchResultsViewController", bundle: MapViewController.bundle)
+        // self.resultsViewController.debug = true
         self.resultsViewController.delegate = self.delegate
         self.resultsViewController.tableView.delegate = self
 

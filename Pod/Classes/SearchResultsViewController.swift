@@ -31,9 +31,12 @@ import UIKit
 
     public var mapItems: [MKMapItem] = [] {
         didSet {
+            if self.debug { print("Reloading with \(self.mapItems.count) items") }
             self.tableView.reloadData()
         }
     }
+
+    public var debug = false
 
     override public func viewDidLoad() {
         super.viewDidLoad()
