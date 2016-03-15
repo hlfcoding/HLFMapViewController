@@ -75,6 +75,12 @@ import UIKit
         self.locationManager = CLLocationManager()
         self.locationManager.delegate = self
 
+        if let placemark = self.selectedMapItem?.placemark, location = placemark.location {
+            self.zoomToLocation(location, animated: false)
+            self.mapView.showAnnotations([placemark], animated: false)
+            self.mapView.selectAnnotation(placemark, animated: false)
+        }
+
         let status = CLLocationManager.authorizationStatus()
         switch status {
         case .NotDetermined:
@@ -255,13 +261,10 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
 
     public func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        guard self.selectedMapItem?.placemark == nil else { return }
         guard let location = userLocation.location else { return }
-        self.zoomToLocation(location, animated: false)
 
-        if let placemark = self.selectedMapItem?.placemark {
-            self.mapView.showAnnotations([placemark], animated: false)
-            self.mapView.selectAnnotation(placemark, animated: false)
-        }
+        self.zoomToLocation(location, animated: false)
     }
 
     public func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
