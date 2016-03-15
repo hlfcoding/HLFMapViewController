@@ -76,12 +76,15 @@ import UIKit
         self.locationManager.delegate = self
 
         let status = CLLocationManager.authorizationStatus()
-        if status == .NotDetermined {
+        switch status {
+        case .NotDetermined:
             self.locationManager.requestAlwaysAuthorization()
-        } else if status != .Denied {
+
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
             self.mapView.showsUserLocation = true
-        } else {
-            self.handleLocationAuthorizationDenial()
+
+        case .Denied, .Restricted:
+            self.handleLocationAuthorizationDenial(status)
         }
     }
 
@@ -130,15 +133,24 @@ import UIKit
      If user denies current location, just present an alert to notify
      them, and show the map in its default state and require manual zoom.
      */
-    private func handleLocationAuthorizationDenial() {
+    private func handleLocationAuthorizationDenial(status: CLAuthorizationStatus) {
+        let message = {
+            switch status {
+            case .Denied: return "You've denied sharing your location (can be changed in Settings)."
+            case .Restricted: return "You're restricted from sharing your location."
+            default: fatalError("Unsupported status.")
+            }
+        }() as String + " You can still find your location manually."
+
         let alertController = UIAlertController(
-            title: "Understood",
-            message: "You've denied sharing your current location. You can always find your location manually.",
+            title: "Location Unavailable",
+            message: message,
             preferredStyle: .Alert
         )
         alertController.addAction(UIAlertAction(title: "OK", style: .Default) { (action) in
             alertController.dismissViewControllerAnimated(true, completion: nil)
         })
+
         self.presentViewController(alertController, animated: true, completion: nil)
         self.revealMapView()
         // TODO: Test usability of search results in this state.
@@ -224,11 +236,15 @@ import UIKit
 extension MapViewController: CLLocationManagerDelegate {
 
     public func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        if status == .AuthorizedWhenInUse || status == .AuthorizedAlways {
+        switch status {
+        case .NotDetermined: return
+
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
             self.mapView.showsUserLocation = true
             self.mapView.setUserTrackingMode(.None, animated: false)
-        } else {
-            self.handleLocationAuthorizationDenial()
+
+        case .Denied, .Restricted:
+            self.handleLocationAuthorizationDenial(status)
         }
     }
 
