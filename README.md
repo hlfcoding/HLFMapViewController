@@ -20,9 +20,11 @@ Other than that just set up the view controller and implement the delegate metho
 // ...
 let mapViewController = MapViewController(nibName: "MapViewController", bundle: MapViewController.bundle)
 mapViewController.delegate = self
+mapViewController.selectedMapItem = self.selectedMapItem // Optional.
 // ...
 
 func mapViewController(mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
+    self.selectedMapItem = mapItem // Save, submit, etc.
     mapViewController.dismissViewControllerAnimated(true, completion: nil)
 }
 ```
