@@ -115,6 +115,7 @@ import UIKit
         self.searchController.searchBar.delegate = self
         self.searchController.searchBar.placeholder = "Search for place or address"
         self.searchController.searchBar.sizeToFit()
+        self.searchController.loadViewIfNeeded()
 
         self.definesPresentationContext = true
         self.navigationItem.titleView = self.searchController.searchBar
