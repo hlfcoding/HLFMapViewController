@@ -286,16 +286,25 @@ extension MapViewController: MKMapViewDelegate {
         selectButton.accessibilityLabel = "Select address in callout view"
         pinView.rightCalloutAccessoryView = selectButton
 
+        let detailsButton = UIButton(type: .DetailDisclosure)
+        detailsButton.accessibilityLabel = "Show address details in Maps application"
+        pinView.leftCalloutAccessoryView = detailsButton
+
         return pinView
     }
 
     public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView,
         calloutAccessoryControlTapped control: UIControl)
     {
-        guard let selectButton = control as? UIButton
-              where selectButton.buttonType == .ContactAdd
-              else { return }
-        self.delegate?.mapViewController(self, didSelectMapItem: MKMapItem(placemark: view.annotation as! MKPlacemark))
+        guard let button = control as? UIButton else { return }
+        let mapItem = MKMapItem(placemark: view.annotation as! MKPlacemark)
+        switch button.buttonType {
+        case .ContactAdd:
+            self.delegate?.mapViewController(self, didSelectMapItem: mapItem)
+        case .DetailDisclosure:
+            mapItem.openInMapsWithLaunchOptions(nil)
+        default: return
+        }
     }
 
 }
