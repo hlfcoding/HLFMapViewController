@@ -67,9 +67,9 @@ import UIKit
 
         let mapItem = self.mapItems[indexPath.row]
         cell.customTextLabel.text = mapItem.name
-        if let addressDictionary = mapItem.placemark.addressDictionary,
-               addressLines = addressDictionary["FormattedAddressLines"] as? [String]
-        {
+        if let
+            addressDictionary = mapItem.placemark.addressDictionary,
+            addressLines = addressDictionary["FormattedAddressLines"] as? [String] {
             cell.customDetailTextLabel.text = addressLines.joinWithSeparator(", ")
         }
 
@@ -77,5 +77,5 @@ import UIKit
 
         return cell
     }
-    
+
 }

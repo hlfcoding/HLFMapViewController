@@ -31,8 +31,7 @@ class ViewController: UIViewController, MapViewControllerDelegate {
     }
 
     func resultsViewController(resultsViewController: SearchResultsViewController,
-                               didConfigureResultViewCell cell: SearchResultsViewCell, withMapItem mapItem: MKMapItem)
-    {
+                               didConfigureResultViewCell cell: SearchResultsViewCell, withMapItem mapItem: MKMapItem) {
         resultsViewController.tableView.rowHeight = 50
 
         var customMargins = cell.contentView.layoutMargins
@@ -40,5 +39,5 @@ class ViewController: UIViewController, MapViewControllerDelegate {
         customMargins.bottom = 15.0
         cell.contentView.layoutMargins = customMargins
     }
-}
 
+}

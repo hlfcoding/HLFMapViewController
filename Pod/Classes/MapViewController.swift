@@ -129,8 +129,7 @@ import UIKit
         var match: MKAnnotation?
         for annotation in self.mapView.annotations
             where annotation.coordinate.latitude == reference.coordinate.latitude &&
-                  annotation.coordinate.longitude == reference.coordinate.longitude
-        {
+                  annotation.coordinate.longitude == reference.coordinate.longitude {
             match = annotation
         }
         return match
@@ -294,8 +293,7 @@ extension MapViewController: MKMapViewDelegate {
     }
 
     public func mapView(mapView: MKMapView, annotationView view: MKAnnotationView,
-        calloutAccessoryControlTapped control: UIControl)
-    {
+                        calloutAccessoryControlTapped control: UIControl) {
         guard let button = control as? UIButton else { return }
         let mapItem = MKMapItem(placemark: view.annotation as! MKPlacemark)
         switch button.buttonType {
@@ -351,7 +349,7 @@ extension MapViewController: UITableViewDelegate {
             if let location = mapItem.placemark.location {
                 self.zoomToLocation(location, animated: false)
             }
-            
+
             if let annotation = self.findMatchingMapViewAnnotation(mapItem.placemark) {
                 // zoomToLocation calls setRegion, which seems to take until the next run loop,
                 // and if we don't wait until it's fully done, it may reset the annotation selection.
@@ -359,7 +357,7 @@ extension MapViewController: UITableViewDelegate {
                     self.mapView.selectAnnotation(annotation, animated: false)
                 }
             }
-            
+
         }
     }
 
