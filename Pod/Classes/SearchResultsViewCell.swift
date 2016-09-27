@@ -8,11 +8,12 @@
 
 import UIKit
 
-@objc(HLFSearchResultsViewCell) final public class SearchResultsViewCell: UITableViewCell {
+@objc(HLFSearchResultsViewCell)
+open class SearchResultsViewCell: UITableViewCell {
 
     static let reuseIdentifier = "SearchResult"
 
-    @IBOutlet public weak var customTextLabel: UILabel!
-    @IBOutlet public weak var customDetailTextLabel: UILabel!
+    @IBOutlet open weak var customTextLabel: UILabel!
+    @IBOutlet open weak var customDetailTextLabel: UILabel!
 
 }

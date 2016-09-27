@@ -15,7 +15,7 @@ class ViewController: UIViewController, MapViewControllerDelegate {
 
     var selectedMapItem: MKMapItem?
 
-    @IBAction func showMap(sender: AnyObject) {
+    @IBAction func showMap(_ sender: Any) {
         let mapViewController = MapViewController(nibName: "MapViewController", bundle: MapViewController.bundle)
         mapViewController.title = NSLocalizedString("Select Nearby Location", comment: "")
         mapViewController.delegate = self
@@ -24,13 +24,13 @@ class ViewController: UIViewController, MapViewControllerDelegate {
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
 
-    func mapViewController(mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
+    func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
         self.selectedMapItem = mapItem
 
         self.navigationController?.popToViewController(self, animated: true)
     }
 
-    func resultsViewController(resultsViewController: SearchResultsViewController,
+    func resultsViewController(_ resultsViewController: SearchResultsViewController,
                                didConfigureResultViewCell cell: SearchResultsViewCell, withMapItem mapItem: MKMapItem) {
         resultsViewController.tableView.rowHeight = 50
 

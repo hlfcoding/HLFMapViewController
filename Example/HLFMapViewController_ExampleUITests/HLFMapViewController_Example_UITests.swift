@@ -33,21 +33,21 @@ class HLFMapViewController_Example_UITests: XCTestCase {
 
         presentButton.tap()
 
-        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: userLocation, handler: nil)
-        self.waitForExpectationsWithTimeout(10.0, handler: nil)
+        self.expectation(for: self.existsPredicate, evaluatedWith: userLocation, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
 
         searchField.tap()
         searchField.typeText("Apple Inc., Cupertino")
         searchResult.tap()
         selectedLocationButton.tap()
 
-        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: presentButton, handler: nil)
-        self.waitForExpectationsWithTimeout(2.0, handler: nil)
+        self.expectation(for: self.existsPredicate, evaluatedWith: presentButton, handler: nil)
+        self.waitForExpectations(timeout: 2.0, handler: nil)
 
         presentButton.tap()
 
-        self.expectationForPredicate(self.existsPredicate, evaluatedWithObject: selectedLocationButton, handler: nil)
-        self.waitForExpectationsWithTimeout(10.0, handler: nil)
+        self.expectation(for: self.existsPredicate, evaluatedWith: selectedLocationButton, handler: nil)
+        self.waitForExpectations(timeout: 10.0, handler: nil)
     }
 
 }
