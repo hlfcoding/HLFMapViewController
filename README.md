@@ -11,6 +11,8 @@
 
 ## Usage
 
+This version uses Swift 3 and Cocoapods 0.1.0+. The final Swift 2 version is 0.2.5.
+
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 In addition to turning on the 'Maps' capability, you'll need to add `location-services` to `UIRequiredDeviceCapabilities`and fill in `NSLocationAlwaysUsageDescription` in your Info.plist.
@@ -24,9 +26,9 @@ mapViewController.delegate = self
 mapViewController.selectedMapItem = self.selectedMapItem // Optional.
 // ...
 
-func mapViewController(mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
+func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
     self.selectedMapItem = mapItem // Save, submit, etc.
-    mapViewController.dismissViewControllerAnimated(true, completion: nil)
+    mapViewController.dismissViewController(animated: true, completion: nil)
 }
 ```
 
