@@ -209,7 +209,7 @@ open class MapViewController: UIViewController {
 
             self.mapView.removeAnnotations(self.mapView.annotations)
             let placemarks = mapItems.map { $0.placemark }
-            self.mapView.showAnnotations(placemarks, animated: false)
+            self.mapView.addAnnotations(placemarks)
         }
     }
 
