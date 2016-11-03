@@ -43,6 +43,10 @@ open class SearchResultsViewController: UITableViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
+        if #available(iOS 10.0, *) {
+            self.automaticallyAdjustsScrollViewInsets = false
+        }
+
         self.tableView.register(
             SearchResultsViewCell.self, forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier
         )
@@ -50,6 +54,16 @@ open class SearchResultsViewController: UITableViewController {
             UINib(nibName: "SearchResultsViewCell", bundle: MapViewController.bundle),
             forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier
         )
+    }
+
+    override open func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if #available(iOS 10.0, *) {
+            let correctOffset = presentingViewController!.topLayoutGuide.length
+            self.tableView.contentInset.top = correctOffset
+            self.tableView.scrollIndicatorInsets.top = correctOffset
+        }
     }
 
     override open func didReceiveMemoryWarning() {
