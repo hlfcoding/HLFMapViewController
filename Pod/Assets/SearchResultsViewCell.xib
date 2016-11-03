@@ -35,9 +35,9 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="VRJ-12-aXo" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="1Rl-Iw-hGS"/>
+                    <constraint firstItem="VRJ-12-aXo" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-15" id="1Rl-Iw-hGS"/>
                     <constraint firstItem="VRJ-12-aXo" firstAttribute="baseline" secondItem="rb4-wu-q8I" secondAttribute="baseline" constant="-1" id="Axb-S1-IYa"/>
-                    <constraint firstItem="rb4-wu-q8I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="JAt-Hl-hrR"/>
+                    <constraint firstItem="rb4-wu-q8I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="JAt-Hl-hrR"/>
                     <constraint firstItem="rb4-wu-q8I" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="NL8-Ov-Ehz"/>
                     <constraint firstItem="rb4-wu-q8I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="j92-oe-mrD"/>
                     <constraint firstItem="VRJ-12-aXo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rb4-wu-q8I" secondAttribute="trailing" constant="10" id="yND-gP-YFt"/>
