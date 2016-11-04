@@ -316,6 +316,16 @@ extension MapViewController: MKMapViewDelegate {
         }
     }
 
+    open func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        guard view is MKPinAnnotationView else { return }
+        mapView.showAnnotations(mapView.annotations, animated: false)
+    }
+
+    open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let placemark = view.annotation as? MKPlacemark else { return }
+        zoom(to: placemark.location!, animated: false)
+    }
+
 }
 
 // MARK: UISearchBarDelegate
@@ -362,7 +372,6 @@ extension MapViewController: UITableViewDelegate {
         let annotationToSelect = self.updateAnnotations()[indexPath.row]
 
         self.resultsViewController.dismiss(animated: true) {
-            self.zoom(to: self.selectedMapItem!.placemark.location!, animated: false)
             self.mapView.selectAnnotation(annotationToSelect, animated: false)
         }
     }
