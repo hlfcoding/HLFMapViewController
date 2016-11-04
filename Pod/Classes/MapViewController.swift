@@ -186,10 +186,6 @@ open class MapViewController: UIViewController {
      Main search handler that makes a `MKLocalSearchRequest` and updates
      `resultsViewController`.
 
-     For now, annotations get updated on `mapView` on search completion,
-     despite latter not being visible. This is to avoid doing more work
-     on dismissal.
-
      See [Apple docs](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/EnablingSearch/EnablingSearch.html).
      */
     fileprivate func searchMapItems(withQuery query: String) {
@@ -206,11 +202,19 @@ open class MapViewController: UIViewController {
 
             guard mapItems != self.resultsViewController.mapItems else { return }
             self.resultsViewController.mapItems = mapItems
-
-            self.mapView.removeAnnotations(self.mapView.annotations)
-            let placemarks = mapItems.map { $0.placemark }
-            self.mapView.addAnnotations(placemarks)
         }
+    }
+
+    /**
+     Simply reloads. But it returns the new annotations because using `MKMapView.annotations`
+     or `MKMapItem.placemark` seems to yield equal but new references unsuited for selecting.
+     Doing so would fail with a warning about 'un-added' annotations.
+     */
+    fileprivate func updateAnnotations() -> [MKAnnotation] {
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        let annotations = self.resultsViewController.mapItems.map { $0.placemark }
+        self.mapView.addAnnotations(annotations)
+        return annotations
     }
 
     /**
@@ -334,6 +338,7 @@ extension MapViewController: UISearchResultsUpdating {
         guard let text = self.searchController.searchBar.text,
             !text.trimmingCharacters(in: CharacterSet.whitespaces).characters.isEmpty
             else { return }
+        // TODO: Debounce.
         self.searchMapItems(withQuery: text)
     }
 
@@ -346,23 +351,12 @@ extension MapViewController: UITableViewDelegate {
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView === self.resultsViewController.tableView else { return }
 
-        let mapItem = self.resultsViewController.mapItems[indexPath.row]
-        self.selectedMapItem = mapItem
+        self.selectedMapItem = self.resultsViewController.mapItems[indexPath.row]
+        let annotationToSelect = self.updateAnnotations()[indexPath.row]
 
         self.resultsViewController.dismiss(animated: true) {
-
-            if let location = mapItem.placemark.location {
-                self.zoom(to: location, animated: false)
-            }
-
-            if let annotation = self.findMatchingMapViewAnnotation(for: mapItem.placemark) {
-                // zoom calls setRegion, which seems to take until the next run loop, and if
-                // we don't wait until it's fully done, it may reset the annotation selection.
-                DispatchQueue.main.async {
-                    self.mapView.selectAnnotation(annotation, animated: false)
-                }
-            }
-
+            self.zoom(to: self.selectedMapItem!.placemark.location!, animated: false)
+            self.mapView.selectAnnotation(annotationToSelect, animated: false)
         }
     }
 
