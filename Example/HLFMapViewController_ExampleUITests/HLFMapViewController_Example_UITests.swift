@@ -15,7 +15,7 @@ class HLFMapViewController_Example_UITests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        self.continueAfterFailure = false
+        continueAfterFailure = false
         XCUIApplication().launch()
     }
 
@@ -33,21 +33,21 @@ class HLFMapViewController_Example_UITests: XCTestCase {
 
         presentButton.tap()
 
-        self.expectation(for: self.existsPredicate, evaluatedWith: userLocation, handler: nil)
-        self.waitForExpectations(timeout: 10.0, handler: nil)
+        expectation(for: existsPredicate, evaluatedWith: userLocation, handler: nil)
+        waitForExpectations(timeout: 10.0, handler: nil)
 
         searchField.tap()
         searchField.typeText("Apple Inc., Cupertino")
         searchResult.tap()
         selectedLocationButton.tap()
 
-        self.expectation(for: self.existsPredicate, evaluatedWith: presentButton, handler: nil)
-        self.waitForExpectations(timeout: 2.0, handler: nil)
+        expectation(for: existsPredicate, evaluatedWith: presentButton, handler: nil)
+        waitForExpectations(timeout: 2.0, handler: nil)
 
         presentButton.tap()
 
-        self.expectation(for: self.existsPredicate, evaluatedWith: selectedLocationButton, handler: nil)
-        self.waitForExpectations(timeout: 10.0, handler: nil)
+        expectation(for: existsPredicate, evaluatedWith: selectedLocationButton, handler: nil)
+        waitForExpectations(timeout: 10.0, handler: nil)
     }
 
 }

@@ -19,15 +19,15 @@ class ViewController: UIViewController, MapViewControllerDelegate {
         let mapViewController = MapViewController(nibName: "MapViewController", bundle: MapViewController.bundle)
         mapViewController.title = NSLocalizedString("Select Nearby Location", comment: "")
         mapViewController.delegate = self
-        mapViewController.selectedMapItem = self.selectedMapItem
+        mapViewController.selectedMapItem = selectedMapItem
 
-        self.navigationController?.pushViewController(mapViewController, animated: true)
+        navigationController?.pushViewController(mapViewController, animated: true)
     }
 
     func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
-        self.selectedMapItem = mapItem
+        selectedMapItem = mapItem
 
-        self.navigationController?.popToViewController(self, animated: true)
+        let _ = navigationController?.popToViewController(self, animated: true)
     }
 
     func resultsViewController(_ resultsViewController: SearchResultsViewController,

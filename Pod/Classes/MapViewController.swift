@@ -48,8 +48,8 @@ open class MapViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        self.initLocationManager()
-        self.initSearchController()
+        initLocationManager()
+        initSearchController()
 
         // TODO: Handle location loading timeout.
     }
@@ -63,7 +63,7 @@ open class MapViewController: UIViewController {
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
-        self.mapView.removeAnnotations(self.mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations)
     }
 
     // MARK: Implementation
@@ -76,25 +76,25 @@ open class MapViewController: UIViewController {
     See [Getting the User's Location](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/CoreLocation/CoreLocation.html).
     */
     fileprivate func initLocationManager() {
-        self.locationManager = CLLocationManager()
-        self.locationManager.delegate = self
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
 
-        if let placemark = self.selectedMapItem?.placemark, let location = placemark.location {
-            self.zoom(to: location, animated: false)
-            self.mapView.showAnnotations([placemark], animated: false)
-            self.mapView.selectAnnotation(placemark, animated: false)
+        if let placemark = selectedMapItem?.placemark, let location = placemark.location {
+            zoom(to: location, animated: false)
+            mapView.showAnnotations([placemark], animated: false)
+            mapView.selectAnnotation(placemark, animated: false)
         }
 
         let status = CLLocationManager.authorizationStatus()
         switch status {
         case .notDetermined:
-            self.locationManager.requestAlwaysAuthorization()
+            locationManager.requestAlwaysAuthorization()
 
         case .authorizedAlways, .authorizedWhenInUse:
-            self.mapView.showsUserLocation = true
+            mapView.showsUserLocation = true
 
         case .denied, .restricted:
-            self.handleLocationAuthorizationDenial(with: status)
+            handleLocationAuthorizationDenial(with: status)
         }
     }
 
@@ -106,25 +106,25 @@ open class MapViewController: UIViewController {
      See [Apple docs](https://developer.apple.com/library/ios/samplecode/TableSearch_UISearchController).
      */
     fileprivate func initSearchController() {
-        self.resultsViewController = SearchResultsViewController(
+        resultsViewController = SearchResultsViewController(
             nibName: "SearchResultsViewController", bundle: MapViewController.bundle
         )
-        // self.resultsViewController.debug = true
-        self.resultsViewController.delegate = self.delegate
-        self.resultsViewController.tableView.delegate = self
+        // resultsViewController.debug = true
+        resultsViewController.delegate = delegate
+        resultsViewController.tableView.delegate = self
 
-        self.searchController = UISearchController(searchResultsController: self.resultsViewController)
-        self.searchController.delegate = self
-        self.searchController.dimsBackgroundDuringPresentation = false
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        self.searchController.searchResultsUpdater = self
-        self.searchController.searchBar.delegate = self
-        self.searchController.searchBar.placeholder = "Search for place or address"
-        self.searchController.searchBar.sizeToFit()
-        self.searchController.loadViewIfNeeded()
+        searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Search for place or address"
+        searchController.searchBar.sizeToFit()
+        searchController.loadViewIfNeeded()
 
-        self.definesPresentationContext = true
-        self.navigationItem.titleView = self.searchController.searchBar
+        definesPresentationContext = true
+        navigationItem.titleView = searchController.searchBar
     }
 
     /**
@@ -133,7 +133,7 @@ open class MapViewController: UIViewController {
      */
     fileprivate func findMatchingMapViewAnnotation(for reference: MKAnnotation) -> MKAnnotation? {
         var match: MKAnnotation?
-        for annotation in self.mapView.annotations
+        for annotation in mapView.annotations
             where annotation.coordinate.latitude == reference.coordinate.latitude &&
                   annotation.coordinate.longitude == reference.coordinate.longitude {
             match = annotation
@@ -163,8 +163,8 @@ open class MapViewController: UIViewController {
             alertController.dismiss(animated: true, completion: nil)
         })
 
-        self.present(alertController, animated: true, completion: nil)
-        self.revealMapView()
+        present(alertController, animated: true, completion: nil)
+        revealMapView()
         // TODO: Test usability of search results in this state.
     }
 
@@ -172,12 +172,12 @@ open class MapViewController: UIViewController {
      Stop any indicators and fade in `mapView`, but only if needed.
      */
     fileprivate func revealMapView(completion: (() -> Void)? = nil) {
-        guard self.mapView.isHidden else { return }
+        guard mapView.isHidden else { return }
 
-        self.mapLoadingIndicator.stopAnimating()
+        mapLoadingIndicator.stopAnimating()
 
-        self.mapView.alpha = 0.0
-        self.mapView.isHidden = false
+        mapView.alpha = 0.0
+        mapView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
             self.mapView.alpha = 1.0
             completion?()
@@ -193,7 +193,7 @@ open class MapViewController: UIViewController {
     @objc fileprivate func searchMapItems(withQuery query: String) {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = query
-        request.region = self.mapView.region
+        request.region = mapView.region
 
         let search = MKLocalSearch(request: request)
         search.start { (searchResponse, error) in
@@ -213,9 +213,9 @@ open class MapViewController: UIViewController {
      Doing so would fail with a warning about 'un-added' annotations.
      */
     fileprivate func updateAnnotations() -> [MKAnnotation] {
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        let annotations = self.resultsViewController.mapItems.map { $0.placemark }
-        self.mapView.addAnnotations(annotations)
+        mapView.removeAnnotations(mapView.annotations)
+        let annotations = resultsViewController.mapItems.map { $0.placemark }
+        mapView.addAnnotations(annotations)
         return annotations
     }
 
@@ -225,7 +225,7 @@ open class MapViewController: UIViewController {
      `MKMapView`.
      */
     fileprivate func zoom(to location: CLLocation, animated: Bool) {
-        self.revealMapView()
+        revealMapView()
 
         let spanDegrees = 0.03
         let region = MKCoordinateRegion(
@@ -236,13 +236,13 @@ open class MapViewController: UIViewController {
             span: MKCoordinateSpanMake(spanDegrees, spanDegrees)
         )
 
-        self.mapView.setRegion(region, animated: animated)
+        mapView.setRegion(region, animated: animated)
     }
 
     // MARK: Actions
 
     @IBAction func dismiss(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
 }
@@ -257,11 +257,11 @@ extension MapViewController: CLLocationManagerDelegate {
         case .notDetermined: return
 
         case .authorizedAlways, .authorizedWhenInUse:
-            self.mapView.showsUserLocation = true
-            self.mapView.setUserTrackingMode(.none, animated: false)
+            mapView.showsUserLocation = true
+            mapView.setUserTrackingMode(.none, animated: false)
 
         case .denied, .restricted:
-            self.handleLocationAuthorizationDenial(with: status)
+            handleLocationAuthorizationDenial(with: status)
         }
     }
 
@@ -272,10 +272,10 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
 
     open func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        guard self.selectedMapItem?.placemark == nil else { return }
+        guard selectedMapItem?.placemark == nil else { return }
         guard let location = userLocation.location else { return }
 
-        self.zoom(to: location, animated: false)
+        zoom(to: location, animated: false)
     }
 
     open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -309,7 +309,7 @@ extension MapViewController: MKMapViewDelegate {
         let mapItem = MKMapItem(placemark: view.annotation as! MKPlacemark)
         switch button.buttonType {
         case .contactAdd:
-            self.delegate?.mapViewController(self, didSelectMapItem: mapItem)
+            delegate?.mapViewController(self, didSelectMapItem: mapItem)
         case .detailDisclosure:
             mapItem.openInMaps(launchOptions: nil)
         default: return
@@ -347,7 +347,7 @@ extension MapViewController: UISearchControllerDelegate {}
 extension MapViewController: UISearchResultsUpdating {
 
     open func updateSearchResults(for searchController: UISearchController) {
-        guard let text = self.searchController.searchBar.text,
+        guard let text = searchController.searchBar.text,
             !text.trimmingCharacters(in: CharacterSet.whitespaces).characters.isEmpty
             else { return }
 
@@ -366,12 +366,12 @@ extension MapViewController: UISearchResultsUpdating {
 extension MapViewController: UITableViewDelegate {
 
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard tableView === self.resultsViewController.tableView else { return }
+        guard tableView === resultsViewController.tableView else { return }
 
-        self.selectedMapItem = self.resultsViewController.mapItems[indexPath.row]
-        let annotationToSelect = self.updateAnnotations()[indexPath.row]
+        selectedMapItem = resultsViewController.mapItems[indexPath.row]
+        let annotationToSelect = updateAnnotations()[indexPath.row]
 
-        self.resultsViewController.dismiss(animated: true) {
+        resultsViewController.dismiss(animated: true) {
             self.mapView.selectAnnotation(annotationToSelect, animated: false)
         }
     }
