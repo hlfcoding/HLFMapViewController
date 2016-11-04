@@ -346,17 +346,24 @@ extension MapViewController: UISearchControllerDelegate {}
 
 extension MapViewController: UISearchResultsUpdating {
 
+    var preparedSearchQuery: String? {
+        guard var text = searchController.searchBar.text else { return nil }
+        return text.trimmingCharacters(in: .whitespaces)
+    }
+
     open func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text,
-            !text.trimmingCharacters(in: CharacterSet.whitespaces).characters.isEmpty
-            else { return }
+        guard let query = preparedSearchQuery else { return }
+        guard !query.isEmpty else {
+            mapView.removeAnnotations(mapView.annotations)
+            return
+        }
 
         let selector = #selector(searchMapItems(query:))
         NSObject.cancelPreviousPerformRequests(
             withTarget: self, selector: selector, object: queuedSearchQuery
         )
-        queuedSearchQuery = text
-        perform(selector, with: text, afterDelay: 0.6)
+        queuedSearchQuery = query
+        perform(selector, with: query, afterDelay: 0.6)
     }
 
 }
