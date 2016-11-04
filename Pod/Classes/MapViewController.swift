@@ -190,7 +190,7 @@ open class MapViewController: UIViewController {
 
      See [Apple docs](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/EnablingSearch/EnablingSearch.html).
      */
-    @objc fileprivate func searchMapItems(withQuery query: String) {
+    @objc fileprivate func searchMapItems(query: String) {
         let request = MKLocalSearchRequest()
         request.naturalLanguageQuery = query
         request.region = mapView.region
@@ -351,7 +351,7 @@ extension MapViewController: UISearchResultsUpdating {
             !text.trimmingCharacters(in: CharacterSet.whitespaces).characters.isEmpty
             else { return }
 
-        let selector = #selector(searchMapItems(withQuery:))
+        let selector = #selector(searchMapItems(query:))
         NSObject.cancelPreviousPerformRequests(
             withTarget: self, selector: selector, object: queuedSearchQuery
         )
