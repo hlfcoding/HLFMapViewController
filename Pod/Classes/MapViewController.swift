@@ -334,6 +334,13 @@ extension MapViewController: UISearchBarDelegate {
 
     open func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        guard queuedSearchQuery == nil, let query = preparedSearchQuery, !query.isEmpty
+            else { return }
+        searchMapItems(query: query)
+    }
+
+    open func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        mapView.removeAnnotations(mapView.annotations)
     }
 
 }
