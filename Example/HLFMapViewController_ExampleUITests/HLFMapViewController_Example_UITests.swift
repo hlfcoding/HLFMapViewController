@@ -30,6 +30,7 @@ class HLFMapViewController_Example_UITests: XCTestCase {
         let searchField = app.navigationBars["Select Nearby Location"].searchFields["Search for place or address"]
         let searchResult = app.tables["Search results"].staticTexts["Apple Inc., 1 Infinite Loop, Cupertino, CA 95014-2083, United States"]
         let selectedLocationButton = app.buttons["Select address in callout view"]
+        let calloutTitle = app.staticTexts["Apple Inc., 1 Infinite Loop, Cupertino, CA 95014-2083, United States"]
 
         presentButton.tap()
 
@@ -39,6 +40,10 @@ class HLFMapViewController_Example_UITests: XCTestCase {
         searchField.tap()
         searchField.typeText("Apple Inc., Cupertino")
         searchResult.tap()
+
+        expectation(for: existsPredicate, evaluatedWith: calloutTitle, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
+
         selectedLocationButton.tap()
 
         expectation(for: existsPredicate, evaluatedWith: presentButton, handler: nil)
@@ -46,6 +51,7 @@ class HLFMapViewController_Example_UITests: XCTestCase {
 
         presentButton.tap()
 
+        expectation(for: existsPredicate, evaluatedWith: calloutTitle, handler: nil)
         expectation(for: existsPredicate, evaluatedWith: selectedLocationButton, handler: nil)
         waitForExpectations(timeout: 10, handler: nil)
     }
