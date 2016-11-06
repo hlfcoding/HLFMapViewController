@@ -35,8 +35,8 @@ class ViewController: UIViewController, MapViewControllerDelegate {
         resultsViewController.tableView.rowHeight = 50
 
         var customMargins = cell.contentView.layoutMargins
-        customMargins.top = 15.0
-        customMargins.bottom = 15.0
+        customMargins.top = 15
+        customMargins.bottom = 15
         cell.contentView.layoutMargins = customMargins
     }
 

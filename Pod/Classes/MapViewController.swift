@@ -176,10 +176,10 @@ open class MapViewController: UIViewController {
 
         mapLoadingIndicator.stopAnimating()
 
-        mapView.alpha = 0.0
+        mapView.alpha = 0
         mapView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
-            self.mapView.alpha = 1.0
+            self.mapView.alpha = 1
             completion?()
         }) 
     }

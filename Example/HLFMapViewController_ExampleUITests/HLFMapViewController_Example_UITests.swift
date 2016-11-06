@@ -34,7 +34,7 @@ class HLFMapViewController_Example_UITests: XCTestCase {
         presentButton.tap()
 
         expectation(for: existsPredicate, evaluatedWith: userLocation, handler: nil)
-        waitForExpectations(timeout: 10.0, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
 
         searchField.tap()
         searchField.typeText("Apple Inc., Cupertino")
@@ -42,12 +42,12 @@ class HLFMapViewController_Example_UITests: XCTestCase {
         selectedLocationButton.tap()
 
         expectation(for: existsPredicate, evaluatedWith: presentButton, handler: nil)
-        waitForExpectations(timeout: 2.0, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
 
         presentButton.tap()
 
         expectation(for: existsPredicate, evaluatedWith: selectedLocationButton, handler: nil)
-        waitForExpectations(timeout: 10.0, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
 
 }
