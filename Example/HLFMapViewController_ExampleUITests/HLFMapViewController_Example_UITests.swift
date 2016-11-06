@@ -26,7 +26,7 @@ class HLFMapViewController_Example_UITests: XCTestCase {
     func testBasicUserFlow() {
         let app = XCUIApplication()
         let presentButton = app.buttons["Show Map"]
-        let userLocation = app.otherElements["Current Location"]
+        let userLocation = app.otherElements["My Location"]
         let searchField = app.navigationBars["Select Nearby Location"].searchFields["Search for place or address"]
         let searchResult = app.tables["Search results"].staticTexts["Apple Inc., 1 Infinite Loop, Cupertino, CA 95014-2083, United States"]
         let selectedLocationButton = app.buttons["Select address in callout view"]
