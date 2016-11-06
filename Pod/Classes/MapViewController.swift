@@ -354,7 +354,7 @@ extension MapViewController: UISearchControllerDelegate {}
 extension MapViewController: UISearchResultsUpdating {
 
     var preparedSearchQuery: String? {
-        guard var text = searchController.searchBar.text else { return nil }
+        guard let text = searchController.searchBar.text else { return nil }
         return text.trimmingCharacters(in: .whitespaces)
     }
 
