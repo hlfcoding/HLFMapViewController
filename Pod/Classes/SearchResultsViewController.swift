@@ -33,8 +33,8 @@ open class SearchResultsViewController: UITableViewController {
 
     open var mapItems: [MKMapItem] = [] {
         didSet {
-            if self.debug { print("Reloading with \(self.mapItems.count) items") }
-            self.tableView.reloadData()
+            if debug { print("Reloading with \(mapItems.count) items") }
+            tableView.reloadData()
         }
     }
 
@@ -44,13 +44,13 @@ open class SearchResultsViewController: UITableViewController {
         super.viewDidLoad()
 
         if #available(iOS 10.0, *) {
-            self.automaticallyAdjustsScrollViewInsets = false
+            automaticallyAdjustsScrollViewInsets = false
         }
 
-        self.tableView.register(
+        tableView.register(
             SearchResultsViewCell.self, forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier
         )
-        self.tableView.register(
+        tableView.register(
             UINib(nibName: "SearchResultsViewCell", bundle: MapViewController.bundle),
             forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier
         )
@@ -61,15 +61,15 @@ open class SearchResultsViewController: UITableViewController {
 
         if #available(iOS 10.0, *) {
             let correctOffset = presentingViewController!.topLayoutGuide.length
-            self.tableView.contentInset.top = correctOffset
-            self.tableView.scrollIndicatorInsets.top = correctOffset
+            tableView.contentInset.top = correctOffset
+            tableView.scrollIndicatorInsets.top = correctOffset
         }
     }
 
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
-        self.mapItems = []
+        mapItems = []
     }
 
     // MARK: UITableViewDataSource
@@ -80,7 +80,7 @@ open class SearchResultsViewController: UITableViewController {
 
     override open func tableView(_ tableView: UITableView,
                                  numberOfRowsInSection section: Int) -> Int {
-        return self.mapItems.count
+        return mapItems.count
     }
 
     override open func tableView(_ tableView: UITableView,
@@ -90,14 +90,14 @@ open class SearchResultsViewController: UITableViewController {
         )
         guard let cell = someCell as? SearchResultsViewCell else { return someCell }
 
-        let mapItem = self.mapItems[indexPath.row]
+        let mapItem = mapItems[indexPath.row]
         cell.customTextLabel.text = mapItem.name
         if let addressDictionary = mapItem.placemark.addressDictionary,
             let addressLines = addressDictionary["FormattedAddressLines"] as? [String] {
             cell.customDetailTextLabel.text = addressLines.joined(separator: ", ")
         }
 
-        self.delegate?.resultsViewController?(
+        delegate?.resultsViewController?(
             self, didConfigureResultViewCell: cell, withMapItem: mapItem
         )
 
