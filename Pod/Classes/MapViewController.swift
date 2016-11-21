@@ -121,6 +121,7 @@ open class MapViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Search for place or address"
+        searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.sizeToFit()
         searchController.loadViewIfNeeded()
 
