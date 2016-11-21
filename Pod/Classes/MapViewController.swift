@@ -50,6 +50,7 @@ open class MapViewController: UIViewController {
 
         initLocationManager()
         initSearchController()
+        mapLoadingIndicator.color = view.tintColor
 
         // TODO: Handle location loading timeout.
     }

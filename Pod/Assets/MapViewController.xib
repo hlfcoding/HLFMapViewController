@@ -26,8 +26,8 @@
                         <outlet property="delegate" destination="-1" id="4j0-hg-bdI"/>
                     </connections>
                 </mapView>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bFc-3I-HFj">
-                    <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bFc-3I-HFj">
+                    <rect key="frame" x="169.5" y="315.5" width="37" height="37"/>
                 </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
