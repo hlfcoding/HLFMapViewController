@@ -22,14 +22,21 @@ public protocol SearchResultsViewControllerDelegate: NSObjectProtocol {
                                               didConfigureResultViewCell cell: SearchResultsViewCell,
                                               withMapItem mapItem: MKMapItem)
 
-}
+    /**
+     Blur style defaults to `light`. This method allows customizing that.
+     */
+    @objc optional func resultsViewControllerBlurEffect(_ resultsViewController: SearchResultsViewController) -> UIBlurEffect
 
+}
 
 @objc(HLFSearchResultsViewController)
 open class SearchResultsViewController: UITableViewController {
 
     /** Not required, but this view controller is pretty useless without a delegate. */
     open weak var delegate: SearchResultsViewControllerDelegate?
+
+    @IBOutlet open weak var blurView: UIVisualEffectView!
+    @IBOutlet open weak var vibrancyView: UIVisualEffectView!
 
     open var mapItems: [MKMapItem] = [] {
         didSet {
@@ -54,6 +61,13 @@ open class SearchResultsViewController: UITableViewController {
             UINib(nibName: "SearchResultsViewCell", bundle: MapViewController.bundle),
             forCellReuseIdentifier: SearchResultsViewCell.reuseIdentifier
         )
+
+        if let effect = delegate?.resultsViewControllerBlurEffect?(self) {
+            blurView.effect = effect
+            vibrancyView.effect = UIVibrancyEffect(blurEffect: effect)
+        }
+        tableView.backgroundView = blurView
+        tableView.separatorEffect = vibrancyView.effect
     }
 
     override open func viewDidLayoutSubviews() {
