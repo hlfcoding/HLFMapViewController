@@ -30,14 +30,22 @@ class ViewController: UIViewController, MapViewControllerDelegate {
         let _ = navigationController?.popToViewController(self, animated: true)
     }
 
+    var customRowHeight: CGFloat?
+
     func resultsViewController(_ resultsViewController: SearchResultsViewController,
                                didConfigureResultViewCell cell: SearchResultsViewCell, withMapItem mapItem: MKMapItem) {
-        resultsViewController.tableView.rowHeight = 50
-
-        var customMargins = cell.contentView.layoutMargins
+        let margins = cell.contentView.layoutMargins
+        var customMargins = margins
         customMargins.top = 15
         customMargins.bottom = 15
         cell.contentView.layoutMargins = customMargins
+
+        if customRowHeight == nil {
+            customRowHeight = resultsViewController.tableView.rowHeight + (
+                (customMargins.top - margins.top) + (customMargins.bottom - margins.bottom)
+            )
+        }
+        resultsViewController.tableView.rowHeight = customRowHeight!
     }
 
 }
