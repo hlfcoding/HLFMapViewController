@@ -20,6 +20,11 @@ public protocol MapViewControllerDelegate: SearchResultsViewControllerDelegate {
      */
     func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem)
 
+    /**
+     Zoomed-in span delta defaults to `0.01`. This method allows customizing that.
+     */
+    @objc optional func mapViewControllerZoomedInSpan(_ mapViewController: MapViewController) -> MKCoordinateSpan
+
 }
 
 /**
@@ -229,7 +234,9 @@ open class MapViewController: UIViewController {
     fileprivate func zoom(to location: CLLocation, animated: Bool) {
         revealMapView()
 
-        let spanDegrees = 0.03
+        var spanDegrees = delegate?.mapViewControllerZoomedInSpan?(self).latitudeDelta ?? 0.01
+        spanDegrees = min(mapView.region.span.latitudeDelta, spanDegrees)
+
         let region = MKCoordinateRegion(
             center: CLLocationCoordinate2D(
                 latitude: location.coordinate.latitude,
