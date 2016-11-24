@@ -71,6 +71,17 @@ open class MapViewController: UIViewController {
     // MARK: Implementation
 
     /**
+     Small helper necessitated by `CLLocationCoordinate2D` not being
+     equatable.
+     */
+    fileprivate func arePlacemarksEqual(_ a: MKPlacemark, _ b: MKPlacemark) -> Bool {
+        return (
+            abs(a.coordinate.latitude - b.coordinate.latitude) < DBL_EPSILON &&
+            abs(a.coordinate.longitude - b.coordinate.longitude) < DBL_EPSILON
+        )
+    }
+
+    /**
     Initializing `locationManager` means getting user location and
     setting `showsUserLocation` to true. Request authorization or
     `handleLocationAuthorizationDenial` if needed.
@@ -124,20 +135,6 @@ open class MapViewController: UIViewController {
 
         definesPresentationContext = true
         navigationItem.titleView = searchController.searchBar
-    }
-
-    /**
-     Small helper necessitated by `CLLocationCoordinate2D` not being
-     equatable.
-     */
-    fileprivate func findMatchingMapViewAnnotation(for reference: MKAnnotation) -> MKAnnotation? {
-        var match: MKAnnotation?
-        for annotation in mapView.annotations
-            where annotation.coordinate.latitude == reference.coordinate.latitude &&
-                  annotation.coordinate.longitude == reference.coordinate.longitude {
-            match = annotation
-        }
-        return match
     }
 
     /**
