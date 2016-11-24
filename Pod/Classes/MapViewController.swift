@@ -306,6 +306,7 @@ extension MapViewController: MKMapViewDelegate {
         let mapItem = MKMapItem(placemark: view.annotation as! MKPlacemark)
         switch button.buttonType {
         case .contactAdd:
+            selectedMapItem = mapItem
             delegate?.mapViewController(self, didSelectMapItem: mapItem)
         case .detailDisclosure:
             mapItem.openInMaps(launchOptions: nil)
@@ -379,9 +380,7 @@ extension MapViewController: UITableViewDelegate {
     open func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView === resultsViewController.tableView else { return }
 
-        selectedMapItem = resultsViewController.mapItems[indexPath.row]
         let annotationToSelect = updateAnnotations()[indexPath.row]
-
         resultsViewController.dismiss(animated: true) {
             self.mapView.selectAnnotation(annotationToSelect, animated: false)
         }
