@@ -41,6 +41,8 @@ open class MapViewController: UIViewController {
     open fileprivate(set) var locationManager: CLLocationManager!
     open fileprivate(set) var searchController: UISearchController!
     open fileprivate(set) var resultsViewController: SearchResultsViewController!
+
+    open var pinColor = MKPinAnnotationView.redPinColor()
     open var selectedMapItem: MKMapItem?
     open var zoomedInSpan: CLLocationDegrees = 0.01
 
@@ -353,15 +355,22 @@ extension MapViewController: MKMapViewDelegate {
         if (!isDeferredSelectionEnabled) {
             pinView.canShowCallout = true
         }
+        pinView.pinTintColor = pinColor
+        if let placemark = annotation as? MKPlacemark, let selectedPlacemark = selectedMapItem?.placemark,
+            arePlacemarksEqual(placemark, selectedPlacemark) {
+            pinView!.pinTintColor = view.tintColor
+        }
         return pinView
     }
 
     open func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
                       calloutAccessoryControlTapped control: UIControl) {
         guard let button = control as? UIButton else { return }
+        guard let view = view as? MKPinAnnotationView else { return }
         let mapItem = MKMapItem(placemark: view.annotation as! MKPlacemark)
         switch button.buttonType {
         case .contactAdd:
+            view.pinTintColor = self.view.tintColor
             selectedMapItem = mapItem
             delegate?.mapViewController(self, didSelectMapItem: mapItem)
         case .detailDisclosure:
