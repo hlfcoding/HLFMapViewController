@@ -20,11 +20,6 @@ public protocol MapViewControllerDelegate: SearchResultsViewControllerDelegate {
      */
     func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem)
 
-    /**
-     Zoomed-in span delta defaults to `0.01`. This method allows customizing that.
-     */
-    @objc optional func mapViewControllerZoomedInSpan(_ mapViewController: MapViewController) -> MKCoordinateSpan
-
 }
 
 /**
@@ -47,6 +42,7 @@ open class MapViewController: UIViewController {
     open fileprivate(set) var searchController: UISearchController!
     open fileprivate(set) var resultsViewController: SearchResultsViewController!
     open var selectedMapItem: MKMapItem?
+    open var zoomedInSpan: CLLocationDegrees = 0.01
 
     var queuedSearchQuery: String?
 
@@ -85,11 +81,7 @@ open class MapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
 
-        if let placemark = selectedMapItem?.placemark, let location = placemark.location {
-            zoom(to: location, animated: false)
-            mapView.showAnnotations([placemark], animated: false)
-            mapView.selectAnnotation(placemark, animated: false)
-        }
+        revealSelectedPlacemark()
 
         let status = CLLocationManager.authorizationStatus()
         switch status {
@@ -191,6 +183,14 @@ open class MapViewController: UIViewController {
         }) 
     }
 
+    fileprivate func revealSelectedPlacemark() {
+        guard let placemark = selectedMapItem?.placemark, let location = placemark.location
+            else { return }
+        zoomIn(to: location, animated: false)
+        mapView.showAnnotations([placemark], animated: false)
+        mapView.selectAnnotation(placemark, animated: false)
+    }
+
     /**
      Main search handler that makes a `MKLocalSearchRequest` and updates
      `resultsViewController`.
@@ -227,21 +227,17 @@ open class MapViewController: UIViewController {
     }
 
     /**
-     Basically converts a location to a region with a hard-coded span of
-     `0.03`, and sets it on `mapView`. Yet another helper missing from
-     `MKMapView`.
+     Basically converts a location to a region with a hard-coded span no larger than
+     `zoomedInSpan`, and sets it on `mapView`. Yet another helper missing from `MKMapView`.
      */
-    fileprivate func zoom(to location: CLLocation, animated: Bool) {
+    fileprivate func zoomIn(to location: CLLocation, animated: Bool) {
         revealMapView()
 
-        var spanDegrees = delegate?.mapViewControllerZoomedInSpan?(self).latitudeDelta ?? 0.01
-        spanDegrees = min(mapView.region.span.latitudeDelta, spanDegrees)
-
+        let degrees = min(mapView.region.span.latitudeDelta, zoomedInSpan)
         let region = MKCoordinateRegion(
             center: location.coordinate,
-            span: MKCoordinateSpanMake(spanDegrees, spanDegrees)
+            span: MKCoordinateSpanMake(degrees, degrees)
         )
-
         mapView.setRegion(region, animated: animated)
     }
 
@@ -278,10 +274,10 @@ extension MapViewController: CLLocationManagerDelegate {
 extension MapViewController: MKMapViewDelegate {
 
     open func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        guard selectedMapItem?.placemark == nil else { return }
+        guard selectedMapItem == nil else { return }
         guard let location = userLocation.location else { return }
 
-        zoom(to: location, animated: false)
+        zoomIn(to: location, animated: false)
     }
 
     open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -327,7 +323,7 @@ extension MapViewController: MKMapViewDelegate {
 
     open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let placemark = view.annotation as? MKPlacemark else { return }
-        zoom(to: placemark.location!, animated: false)
+        zoomIn(to: placemark.location!, animated: true)
     }
 
 }
