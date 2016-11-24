@@ -238,10 +238,7 @@ open class MapViewController: UIViewController {
         spanDegrees = min(mapView.region.span.latitudeDelta, spanDegrees)
 
         let region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(
-                latitude: location.coordinate.latitude,
-                longitude: location.coordinate.longitude
-            ),
+            center: location.coordinate,
             span: MKCoordinateSpanMake(spanDegrees, spanDegrees)
         )
 
@@ -291,24 +288,22 @@ extension MapViewController: MKMapViewDelegate {
         guard !annotation.isEqual(mapView.userLocation) else { return nil }
 
         let reuseIdentifier = "customAnnotation"
-        let dequeued = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
-        guard dequeued == nil else {
-            dequeued!.annotation = annotation
-            return dequeued
+        let pinView: MKPinAnnotationView!
+        if let dequeued = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView {
+            pinView = dequeued
+            pinView.annotation = annotation
+        } else {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            pinView.accessibilityValue = annotation.title ?? "An unknown location"
+
+            let selectButton = UIButton(type: .contactAdd)
+            selectButton.accessibilityLabel = "Select address in callout view"
+            pinView.rightCalloutAccessoryView = selectButton
+
+            let detailsButton = UIButton(type: .detailDisclosure)
+            detailsButton.accessibilityLabel = "Show address details in Maps application"
+            pinView.leftCalloutAccessoryView = detailsButton
         }
-
-        let pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-        pinView.canShowCallout = true
-        pinView.accessibilityValue = annotation.title ?? "An unknown location"
-
-        let selectButton = UIButton(type: .contactAdd)
-        selectButton.accessibilityLabel = "Select address in callout view"
-        pinView.rightCalloutAccessoryView = selectButton
-
-        let detailsButton = UIButton(type: .detailDisclosure)
-        detailsButton.accessibilityLabel = "Show address details in Maps application"
-        pinView.leftCalloutAccessoryView = detailsButton
-
         return pinView
     }
 
