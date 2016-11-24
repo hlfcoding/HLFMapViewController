@@ -65,10 +65,14 @@ open class MapViewController: UIViewController {
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
-        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeAnnotations(removableAnnotations)
     }
 
     // MARK: Implementation
+
+    fileprivate var removableAnnotations: [MKAnnotation] {
+        return mapView.annotations.filter(isNonSelectedPlacemark)
+    }
 
     /**
      Small helper necessitated by `CLLocationCoordinate2D` not being
@@ -79,6 +83,12 @@ open class MapViewController: UIViewController {
             abs(a.coordinate.latitude - b.coordinate.latitude) < DBL_EPSILON &&
             abs(a.coordinate.longitude - b.coordinate.longitude) < DBL_EPSILON
         )
+    }
+
+    fileprivate func isNonSelectedPlacemark(_ annotation: MKAnnotation) -> Bool {
+        guard let placemark = annotation as? MKPlacemark else { return false }
+        guard let selectedPlacemark = self.selectedMapItem?.placemark else { return true }
+        return !self.arePlacemarksEqual(placemark, selectedPlacemark)
     }
 
     /**
@@ -217,10 +227,11 @@ open class MapViewController: UIViewController {
      Doing so would fail with a warning about 'un-added' annotations.
      */
     fileprivate func updateAnnotations() -> [MKAnnotation] {
-        mapView.removeAnnotations(mapView.annotations)
-        let annotations = resultsViewController.mapItems.map { $0.placemark }
-        mapView.addAnnotations(annotations)
-        return annotations
+        mapView.removeAnnotations(removableAnnotations)
+        var addiblePlacemarks = resultsViewController.mapItems.map { $0.placemark }
+            .filter(isNonSelectedPlacemark)
+        mapView.addAnnotations(addiblePlacemarks)
+        return addiblePlacemarks
     }
 
     /**
@@ -236,6 +247,11 @@ open class MapViewController: UIViewController {
             span: MKCoordinateSpanMake(degrees, degrees)
         )
         mapView.setRegion(region, animated: animated)
+    }
+
+    fileprivate func zoomOut(animated: Bool) {
+        let annotations = mapView.annotations.filter(isNonSelectedPlacemark)
+        mapView.showAnnotations(annotations, animated: true)
     }
 
     // MARK: Actions
@@ -316,7 +332,7 @@ extension MapViewController: MKMapViewDelegate {
 
     open func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
         guard view is MKPinAnnotationView else { return }
-        mapView.showAnnotations(mapView.annotations, animated: false)
+        zoomOut(animated: true)
     }
 
     open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -338,7 +354,7 @@ extension MapViewController: UISearchBarDelegate {
     }
 
     open func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeAnnotations(removableAnnotations)
     }
 
 }
@@ -359,7 +375,7 @@ extension MapViewController: UISearchResultsUpdating {
     open func updateSearchResults(for searchController: UISearchController) {
         guard let query = preparedSearchQuery else { return }
         guard !query.isEmpty else {
-            mapView.removeAnnotations(mapView.annotations)
+            mapView.removeAnnotations(removableAnnotations)
             return
         }
 
