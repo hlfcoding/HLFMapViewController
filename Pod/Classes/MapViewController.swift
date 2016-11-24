@@ -193,6 +193,7 @@ open class MapViewController: UIViewController {
     fileprivate func revealSelectedPlacemark() {
         guard let placemark = selectedMapItem?.placemark, let location = placemark.location
             else { return }
+        isDeferredSelectionEnabled = false
         zoomIn(to: location, animated: false)
         mapView.showAnnotations([placemark], animated: false)
         mapView.selectAnnotation(placemark, animated: false)
@@ -254,6 +255,41 @@ open class MapViewController: UIViewController {
         mapView.showAnnotations(annotations, animated: true)
     }
 
+    // MARK: Hack: http://stackoverflow.com/a/38155566/65465
+
+    fileprivate var deferredSelectedPinView: MKPinAnnotationView?
+    fileprivate let fragileAssumptiveSelectionDuration: TimeInterval = 0.3
+    fileprivate var isDeferredSelectionEnabled = true
+    fileprivate var isDeferringSelection: Bool { return deferredSelectedPinView != nil }
+
+    fileprivate func performDeferredSelection(animated: Bool) {
+        guard let pinView = deferredSelectedPinView else { return }
+        pinView.canShowCallout = true
+        let delay = fragileAssumptiveSelectionDuration
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            self.mapView.deselectAnnotation(pinView.annotation, animated: false)
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                self.mapView.selectAnnotation(pinView.annotation!, animated: animated)
+            }
+        }
+    }
+
+    fileprivate func setUpDeferredSelection(view: MKPinAnnotationView) -> Bool {
+        if isDeferredSelectionEnabled {
+            deferredSelectedPinView = view
+            return true
+        } else {
+            isDeferredSelectionEnabled = true // Restore to default.
+            return false
+        }
+    }
+
+    fileprivate func tearDownDeferredSelection() -> Bool {
+        guard isDeferringSelection else { return false }
+        deferredSelectedPinView = nil
+        return true
+    }
+
     // MARK: Actions
 
     @IBAction func dismiss(_ sender: Any) {
@@ -288,6 +324,7 @@ extension MapViewController: MKMapViewDelegate {
 
     open func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         guard selectedMapItem == nil else { return }
+        guard mapView.selectedAnnotations.isEmpty else { return }
         guard let location = userLocation.location else { return }
 
         zoomIn(to: location, animated: false)
@@ -313,6 +350,9 @@ extension MapViewController: MKMapViewDelegate {
             detailsButton.accessibilityLabel = "Show address details in Maps application"
             pinView.leftCalloutAccessoryView = detailsButton
         }
+        if (!isDeferredSelectionEnabled) {
+            pinView.canShowCallout = true
+        }
         return pinView
     }
 
@@ -331,13 +371,22 @@ extension MapViewController: MKMapViewDelegate {
     }
 
     open func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        guard view is MKPinAnnotationView else { return }
+        guard let view = view as? MKPinAnnotationView else { return }
+        guard !isDeferringSelection else { return }
         zoomOut(animated: true)
+        view.canShowCallout = false
     }
 
     open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let view = view as? MKPinAnnotationView else { return }
+        guard !tearDownDeferredSelection() else { return }
+        guard setUpDeferredSelection(view: view) else { return }
         guard let placemark = view.annotation as? MKPlacemark else { return }
         zoomIn(to: placemark.location!, animated: true)
+    }
+
+    open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        performDeferredSelection(animated: animated)
     }
 
 }
