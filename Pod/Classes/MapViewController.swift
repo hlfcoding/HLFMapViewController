@@ -231,10 +231,9 @@ open class MapViewController: UIViewController {
      */
     fileprivate func updateAnnotations() -> [MKAnnotation] {
         mapView.removeAnnotations(removableAnnotations)
-        var addiblePlacemarks = resultsViewController.mapItems.map { $0.placemark }
-            .filter(isNonSelectedPlacemark)
-        mapView.addAnnotations(addiblePlacemarks)
-        return addiblePlacemarks
+        let placemarks = resultsViewController.mapItems.map { $0.placemark }
+        mapView.addAnnotations(placemarks.filter(isNonSelectedPlacemark))
+        return placemarks
     }
 
     /**
