@@ -19,6 +19,7 @@ public protocol MapViewControllerDelegate: SearchResultsViewControllerDelegate {
      An `MKMapItem` is wrapped around the annotation.
      */
     func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem)
+    func mapViewController(_ mapViewController: MapViewController, didDeselectMapItem mapItem: MKMapItem)
 
 }
 
@@ -46,6 +47,7 @@ open class MapViewController: UIViewController {
     open var selectedMapItem: MKMapItem?
     open var zoomedInSpan: CLLocationDegrees = 0.01
 
+    public var hasResults: Bool { return !resultsViewController.mapItems.isEmpty }
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -321,17 +323,22 @@ extension MapViewController: CLLocationManagerDelegate {
 
 final fileprivate class MapPinView: MKPinAnnotationView {
 
+    static let iconFont = UIFont.systemFont(ofSize: 24, weight: UIFontWeightMedium)
     static let reuseIdentifier = "MapPinView"
 
     var defaultColor = MKPinAnnotationView.redPinColor()
     var isPlacemarkSelected = false {
         didSet {
             if isPlacemarkSelected {
+                selectButton.accessibilityLabel = "Deselect address in callout view"
+                selectButton.setTitle("－", for: .normal)
                 pinTintColor = tintColor
             } else {
                 selectButton.accessibilityLabel = "Select address in callout view"
+                selectButton.setTitle("＋", for: .normal)
                 pinTintColor = defaultColor
             }
+            selectButton.sizeToFit()
         }
     }
     var placemark: MKPlacemark { return annotation as! MKPlacemark }
@@ -343,7 +350,8 @@ final fileprivate class MapPinView: MKPinAnnotationView {
     }()
 
     lazy var selectButton: UIButton = {
-        let button = UIButton(type: .contactAdd)
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = iconFont
         return button
     }()
 
@@ -416,6 +424,8 @@ extension MapViewController: MKMapViewDelegate {
         switch button {
         case view.selectButton:
             if view.isPlacemarkSelected {
+                selectedMapItem = nil
+                delegate?.mapViewController(self, didDeselectMapItem: mapItem)
             } else {
                 selectedMapItem = mapItem
                 delegate?.mapViewController(self, didSelectMapItem: mapItem)

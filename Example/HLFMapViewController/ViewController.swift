@@ -27,7 +27,17 @@ class ViewController: UIViewController, MapViewControllerDelegate {
     func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
         selectedMapItem = mapItem
 
-        let _ = navigationController?.popToViewController(self, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let _ = self.navigationController?.popToViewController(self, animated: true)
+        }
+    }
+
+    func mapViewController(_ mapViewController: MapViewController, didDeselectMapItem mapItem: MKMapItem) {
+        selectedMapItem = nil
+
+        if !mapViewController.hasResults {
+            let _ = navigationController?.popToViewController(self, animated: true)
+        }
     }
 
     var customRowHeight: CGFloat?
