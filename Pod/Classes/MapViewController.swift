@@ -42,11 +42,10 @@ open class MapViewController: UIViewController {
     open fileprivate(set) var searchController: UISearchController!
     open fileprivate(set) var resultsViewController: SearchResultsViewController!
 
-    open var pinColor = MKPinAnnotationView.redPinColor()
+    open var pinColor: UIColor?
     open var selectedMapItem: MKMapItem?
     open var zoomedInSpan: CLLocationDegrees = 0.01
 
-    var queuedSearchQuery: String?
 
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +71,7 @@ open class MapViewController: UIViewController {
 
     // MARK: Implementation
 
+    fileprivate var queuedSearchQuery: String?
     fileprivate var removableAnnotations: [MKAnnotation] {
         return mapView.annotations.filter(isNonSelectedPlacemark)
     }
@@ -320,6 +320,57 @@ extension MapViewController: CLLocationManagerDelegate {
 
 }
 
+final fileprivate class MapPinView: MKPinAnnotationView {
+
+    static let reuseIdentifier = "MapPinView"
+
+    var defaultColor = MKPinAnnotationView.redPinColor()
+    var isPlacemarkSelected = false {
+        didSet {
+            if isPlacemarkSelected {
+                pinTintColor = tintColor
+            } else {
+                selectButton.accessibilityLabel = "Select address in callout view"
+                pinTintColor = defaultColor
+            }
+        }
+    }
+    var placemark: MKPlacemark { return annotation as! MKPlacemark }
+
+    lazy var detailsButton: UIButton = {
+        let button = UIButton(type: .detailDisclosure)
+        button.accessibilityLabel = "Show address details in Maps application"
+        return button
+    }()
+
+    lazy var selectButton: UIButton = {
+        let button = UIButton(type: .contactAdd)
+        return button
+    }()
+
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        setUp()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setUp()
+    }
+
+    override func prepareForReuse() {
+        isPlacemarkSelected = false
+    }
+
+    func setUp() {
+        accessibilityValue = placemark.title ?? "An unknown location"
+        leftCalloutAccessoryView = detailsButton
+        rightCalloutAccessoryView = selectButton
+        isPlacemarkSelected = false
+    }
+
+}
+
 // MARK: MKMapViewDelegate
 
 extension MapViewController: MKMapViewDelegate {
@@ -335,45 +386,43 @@ extension MapViewController: MKMapViewDelegate {
     open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !annotation.isEqual(mapView.userLocation) else { return nil }
 
-        let reuseIdentifier = "customAnnotation"
-        let pinView: MKPinAnnotationView!
-        if let dequeued = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView {
+        let pinView: MapPinView!
+        let reuseIdentifier = String(describing: MapPinView.self)
+        if let dequeued = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MapPinView {
             pinView = dequeued
             pinView.annotation = annotation
         } else {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            pinView.accessibilityValue = annotation.title ?? "An unknown location"
-
-            let selectButton = UIButton(type: .contactAdd)
-            selectButton.accessibilityLabel = "Select address in callout view"
-            pinView.rightCalloutAccessoryView = selectButton
-
-            let detailsButton = UIButton(type: .detailDisclosure)
-            detailsButton.accessibilityLabel = "Show address details in Maps application"
-            pinView.leftCalloutAccessoryView = detailsButton
+            pinView = MapPinView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         }
+
         if (!isDeferredSelectionEnabled) {
             pinView.canShowCallout = true
         }
-        pinView.pinTintColor = pinColor
+        if let pinColor = pinColor {
+            pinView.defaultColor = pinColor
+        }
         if let placemark = annotation as? MKPlacemark, let selectedPlacemark = selectedMapItem?.placemark,
             arePlacemarksEqual(placemark, selectedPlacemark) {
-            pinView!.pinTintColor = view.tintColor
+            pinView.isPlacemarkSelected = true
         }
+
         return pinView
     }
 
     open func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
                       calloutAccessoryControlTapped control: UIControl) {
         guard let button = control as? UIButton else { return }
-        guard let view = view as? MKPinAnnotationView else { return }
-        let mapItem = MKMapItem(placemark: view.annotation as! MKPlacemark)
-        switch button.buttonType {
-        case .contactAdd:
-            view.pinTintColor = self.view.tintColor
-            selectedMapItem = mapItem
-            delegate?.mapViewController(self, didSelectMapItem: mapItem)
-        case .detailDisclosure:
+        guard let view = view as? MapPinView else { return }
+        let mapItem = MKMapItem(placemark: view.placemark)
+        switch button {
+        case view.selectButton:
+            if view.isPlacemarkSelected {
+            } else {
+                selectedMapItem = mapItem
+                delegate?.mapViewController(self, didSelectMapItem: mapItem)
+            }
+            view.isPlacemarkSelected = !view.isPlacemarkSelected
+        case view.detailsButton:
             mapItem.openInMaps(launchOptions: nil)
         default: return
         }
