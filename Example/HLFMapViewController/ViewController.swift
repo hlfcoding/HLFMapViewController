@@ -13,7 +13,34 @@ import HLFMapViewController
 
 class ViewController: UIViewController, MapViewControllerDelegate {
 
-    var selectedMapItem: MKMapItem?
+    @IBOutlet var addressLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+
+    var selectedMapItem: MKMapItem? {
+        didSet {
+            guard selectedMapItem != oldValue else { return }
+            updateLocationLabels()
+        }
+    }
+
+    func updateLocationLabels() {
+        if let placemark = selectedMapItem?.placemark {
+            let line1 = "\(placemark.subThoroughfare ?? "?") \(placemark.thoroughfare ?? "?")"
+            let line2 = "\(placemark.locality ?? "?"), \(placemark.administrativeArea ?? "?") \(placemark.postalCode ?? "?")"
+            addressLabel.text = "\(line1)\n\(line2)"
+            addressLabel.textColor = UIColor.darkText
+        } else {
+            addressLabel.text = "Address"
+            addressLabel.textColor = UIColor.lightGray
+        }
+        if let name = selectedMapItem?.name {
+            nameLabel.text = name
+            nameLabel.textColor = UIColor.darkText
+        } else {
+            nameLabel.text = "Name"
+            nameLabel.textColor = UIColor.lightGray
+        }
+    }
 
     @IBAction func showMap(_ sender: Any) {
         let mapViewController = MapViewController(nibName: "MapViewController", bundle: MapViewController.bundle)
@@ -23,6 +50,15 @@ class ViewController: UIViewController, MapViewControllerDelegate {
 
         navigationController?.pushViewController(mapViewController, animated: true)
     }
+
+    // MARK: -
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        updateLocationLabels()
+    }
+
+    // MARK: -
 
     func mapViewController(_ mapViewController: MapViewController, didSelectMapItem mapItem: MKMapItem) {
         selectedMapItem = mapItem
