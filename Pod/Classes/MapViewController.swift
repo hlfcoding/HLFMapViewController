@@ -289,6 +289,7 @@ open class MapViewController: UIViewController {
 
     fileprivate func tearDownDeferredSelection() -> Bool {
         guard isDeferringSelection else { return false }
+        deferredSelectedPinView!.canShowCallout = false
         deferredSelectedPinView = nil
         return true
     }
@@ -441,7 +442,6 @@ extension MapViewController: MKMapViewDelegate {
         guard let view = view as? MKPinAnnotationView else { return }
         guard !isDeferringSelection else { return }
         zoomOut(animated: true)
-        view.canShowCallout = false
     }
 
     open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
