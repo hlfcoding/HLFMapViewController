@@ -44,6 +44,7 @@ open class MapViewController: UIViewController {
     open fileprivate(set) var resultsViewController: SearchResultsViewController!
 
     open var pinColor: UIColor?
+    open var searchDebounceDuration: TimeInterval = 0.6
     open var selectedMapItem: MKMapItem?
     open var zoomedInSpan: CLLocationDegrees = 0.01
 
@@ -73,10 +74,16 @@ open class MapViewController: UIViewController {
 
     // MARK: Implementation
 
-    fileprivate var queuedSearchQuery: String?
     fileprivate var removableAnnotations: [MKAnnotation] {
         return mapView.annotations.filter(isNonSelectedPlacemark)
     }
+    fileprivate var searchQuery = "" {
+        didSet {
+            updateSearchRequest()
+        }
+    }
+    fileprivate var searchRequest = MKLocalSearchRequest()
+    fileprivate var shouldDebounceNextSearch = true
 
     /**
      Small helper necessitated by `CLLocationCoordinate2D` not being
@@ -204,17 +211,13 @@ open class MapViewController: UIViewController {
     }
 
     /**
-     Main search handler that makes a `MKLocalSearchRequest` and updates
+     Main search handler that makes a `MKLocalSearch` based on `searchRequest` and updates
      `resultsViewController`.
 
      See [Apple docs](https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/LocationAwarenessPG/EnablingSearch/EnablingSearch.html).
      */
-    @objc fileprivate func searchMapItems(query: String) {
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = query
-        request.region = mapView.region
-
-        let search = MKLocalSearch(request: request)
+    @objc fileprivate func searchMapItems() {
+        let search = MKLocalSearch(request: searchRequest)
         search.start { (searchResponse, error) in
             guard let mapItems = searchResponse?.mapItems else {
                 print("MKLocalSearch error: \(error)")
@@ -236,6 +239,18 @@ open class MapViewController: UIViewController {
         let placemarks = resultsViewController.mapItems.map { $0.placemark }
         mapView.addAnnotations(placemarks.filter(isNonSelectedPlacemark))
         return placemarks
+    }
+
+    fileprivate func updateSearchRequest() {
+        searchRequest.naturalLanguageQuery = searchQuery
+        searchRequest.region = mapView.region
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(searchMapItems), object: nil)
+        if shouldDebounceNextSearch {
+            perform(#selector(searchMapItems), with: nil, afterDelay: searchDebounceDuration)
+        } else {
+            searchMapItems()
+            shouldDebounceNextSearch = true
+        }
     }
 
     /**
@@ -464,9 +479,9 @@ extension MapViewController: UISearchBarDelegate {
 
     open func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        guard queuedSearchQuery == nil, let query = preparedSearchQuery, !query.isEmpty
-            else { return }
-        searchMapItems(query: query)
+        guard let query = preparedSearchQuery, !query.isEmpty else { return }
+        shouldDebounceNextSearch = false
+        searchQuery = query
     }
 
     open func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -494,13 +509,7 @@ extension MapViewController: UISearchResultsUpdating {
             mapView.removeAnnotations(removableAnnotations)
             return
         }
-
-        let selector = #selector(searchMapItems(query:))
-        NSObject.cancelPreviousPerformRequests(
-            withTarget: self, selector: selector, object: queuedSearchQuery
-        )
-        queuedSearchQuery = query
-        perform(selector, with: query, afterDelay: 0.6)
+        searchQuery = query
     }
 
 }
