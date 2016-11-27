@@ -66,6 +66,12 @@ open class MapViewController: UIViewController {
         // TODO: Restore searchController state by implementing UIStateRestoring.
     }
 
+    override open func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        search?.cancel()
+    }
+
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
@@ -77,6 +83,7 @@ open class MapViewController: UIViewController {
     fileprivate var removableAnnotations: [MKAnnotation] {
         return mapView.annotations.filter(isNonSelectedPlacemark)
     }
+    fileprivate var search: MKLocalSearch?
     fileprivate var searchQuery = "" {
         didSet {
             updateSearchRequest()
@@ -218,7 +225,7 @@ open class MapViewController: UIViewController {
      */
     @objc fileprivate func searchMapItems() {
         let search = MKLocalSearch(request: searchRequest)
-        search.start { (searchResponse, error) in
+        search.start { [unowned self] (searchResponse, error) in
             guard let mapItems = searchResponse?.mapItems else {
                 print("MKLocalSearch error: \(error)")
                 return
@@ -227,6 +234,7 @@ open class MapViewController: UIViewController {
             guard mapItems != self.resultsViewController.mapItems else { return }
             self.resultsViewController.mapItems = mapItems
         }
+        self.search = search
     }
 
     /**
