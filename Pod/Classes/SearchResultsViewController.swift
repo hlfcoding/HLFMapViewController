@@ -105,8 +105,7 @@ open class SearchResultsViewController: UITableViewController {
 
         let mapItem = mapItems[indexPath.row]
         cell.customTextLabel.text = mapItem.name
-        if let addressDictionary = mapItem.placemark.addressDictionary,
-            let addressLines = addressDictionary["FormattedAddressLines"] as? [String] {
+        if let addressLines = mapItem.placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
             cell.customDetailTextLabel.text = addressLines.joined(separator: ", ")
         }
 

@@ -24,10 +24,8 @@ class ViewController: UIViewController, MapViewControllerDelegate {
     }
 
     func updateLocationLabels() {
-        if let placemark = selectedMapItem?.placemark {
-            let line1 = "\(placemark.subThoroughfare ?? "?") \(placemark.thoroughfare ?? "?")"
-            let line2 = "\(placemark.locality ?? "?"), \(placemark.administrativeArea ?? "?") \(placemark.postalCode ?? "?")"
-            addressLabel.text = "\(line1)\n\(line2)"
+        if let addressLines = selectedMapItem?.placemark.addressDictionary?["FormattedAddressLines"] as? [String] {
+            addressLabel.text = addressLines.joined(separator: "\n")
             addressLabel.textColor = UIColor.darkText
         } else {
             addressLabel.text = "Address"
