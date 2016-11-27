@@ -28,5 +28,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/Classes/**/*'
   s.resources = 'Pod/Assets/**/*'
 
-  s.frameworks = 'UIKit', 'Contacts', 'CoreLocation', 'MapKit'
+  s.frameworks = 'UIKit', 'CoreLocation', 'MapKit'
 end
