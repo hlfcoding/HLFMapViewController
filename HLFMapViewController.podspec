@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
                        A generic implementation of a common feature: searching
                        and selecting a nearby location from an MKMapView.
                        DESC
-  s.screenshots      = [ "https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-1.png",
-                         "https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-2.png" ]
+  s.screenshots      = [ "https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-1-2.png",
+                         "https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-2-2.png" ]
   s.homepage         = "https://github.com/hlfcoding/HLFMapViewController"
   s.license          = 'MIT'
   s.author           = { "Peng Wang" => "peng@pengxwang.com" }
