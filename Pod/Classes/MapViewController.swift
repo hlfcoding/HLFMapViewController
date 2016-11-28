@@ -298,9 +298,9 @@ open class MapViewController: UIViewController {
         let pinView = deferredSelectedPinView!
         pinView.canShowCallout = true
         let delay = fragileAssumptiveSelectionDuration
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [unowned self] in
             self.mapView.deselectAnnotation(pinView.annotation, animated: false)
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [unowned self] in
                 self.mapView.selectAnnotation(pinView.annotation!, animated: animated)
             }
         }
@@ -316,6 +316,7 @@ open class MapViewController: UIViewController {
     fileprivate func setUpDeferredSelection(view: MKPinAnnotationView) -> Bool {
         if isDeferredSelectionEnabled {
             deferredSelectedPinView = view
+            mapView.isUserInteractionEnabled = false
             return true
         } else {
             isDeferredSelectionEnabled = true // Restore to default.
@@ -327,6 +328,7 @@ open class MapViewController: UIViewController {
         guard isDeferringSelection else { return false }
         deferredSelectedPinView!.canShowCallout = false
         deferredSelectedPinView = nil
+        mapView.isUserInteractionEnabled = true
         return true
     }
 
