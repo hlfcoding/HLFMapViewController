@@ -87,6 +87,7 @@ open class MapViewController: UIViewController {
     fileprivate var preparedSearchQuery: String {
         return searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
+    fileprivate var previousVisibleRect: MKMapRect?
     fileprivate var removableAnnotations: [MKAnnotation] {
         return mapView.annotations.filter(isNonSelectedPlacemark)
     }
@@ -96,8 +97,23 @@ open class MapViewController: UIViewController {
             updateSearchRequest()
         }
     }
+    fileprivate var searchRegion: MKCoordinateRegion? {
+        didSet {
+            updateSearchRequest()
+        }
+    }
     fileprivate var searchRequest = MKLocalSearchRequest()
     fileprivate var shouldDebounceNextSearch = true
+    fileprivate var wasMapPanned: Bool {
+        let size = mapView.visibleMapRect.size
+        defer {
+            previousVisibleRect = mapView.visibleMapRect
+        }
+        if let previousSize = previousVisibleRect?.size, abs(size.width - previousSize.width) < 1 {
+            return true
+        }
+        return false
+    }
 
     /**
      Small helper necessitated by `CLLocationCoordinate2D` not being
@@ -127,7 +143,7 @@ open class MapViewController: UIViewController {
         locationManager = CLLocationManager()
         locationManager.delegate = self
 
-        revealSelectedPlacemark()
+        DispatchQueue.main.async(execute: revealSelectedPlacemark)
 
         let status = CLLocationManager.authorizationStatus()
         switch status {
@@ -197,6 +213,10 @@ open class MapViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
         revealMapView()
         // TODO: Test usability of search results in this state.
+    }
+
+    @objc fileprivate func redoSearch() {
+        print("update region and redo search in new region, without UI")
     }
 
     /**
@@ -495,7 +515,16 @@ extension MapViewController: MKMapViewDelegate {
     }
 
     open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        performDeferredSelection(animated: animated)
+        if isDeferringSelection {
+            performDeferredSelection(animated: animated)
+        } else {
+            guard !searchController.searchBar.isFirstResponder else { return }
+            guard mapView.selectedAnnotations.isEmpty else { return }
+            guard hasSearch else { return }
+            guard wasMapPanned else { return }
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(redoSearch), object: nil)
+            self.perform(#selector(redoSearch), with: nil, afterDelay: searchDebounceDuration)
+        }
     }
 
 }
