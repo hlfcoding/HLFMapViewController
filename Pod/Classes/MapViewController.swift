@@ -428,7 +428,7 @@ extension MapViewController: MKMapViewDelegate {
 
     open func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         guard selectedMapItem == nil else { return }
-        guard mapView.selectedAnnotations.isEmpty else { return }
+        guard removableAnnotations.isEmpty else { return }
         guard let _ = userLocation.location else { return }
 
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(zoomToUserLocation), object: nil)
