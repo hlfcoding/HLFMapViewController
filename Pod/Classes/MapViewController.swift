@@ -295,7 +295,7 @@ open class MapViewController: UIViewController {
     fileprivate var isDeferringSelection: Bool { return deferredSelectedPinView != nil }
 
     fileprivate func performDeferredSelection(animated: Bool) {
-        guard let pinView = deferredSelectedPinView else { return }
+        let pinView = deferredSelectedPinView!
         pinView.canShowCallout = true
         let delay = fragileAssumptiveSelectionDuration
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -303,6 +303,13 @@ open class MapViewController: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 self.mapView.selectAnnotation(pinView.annotation!, animated: animated)
             }
+        }
+    }
+
+    fileprivate func prepareViewForDeferredSelection(view: MKPinAnnotationView) {
+        // canShowCallout is false by default.
+        if (!isDeferredSelectionEnabled) {
+            view.canShowCallout = true
         }
     }
 
@@ -432,9 +439,7 @@ extension MapViewController: MKMapViewDelegate {
             pinView = MapPinView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         }
 
-        if (!isDeferredSelectionEnabled) {
-            pinView.canShowCallout = true
-        }
+        prepareViewForDeferredSelection(view: pinView)
         if let pinColor = pinColor {
             pinView.defaultColor = pinColor
         }
