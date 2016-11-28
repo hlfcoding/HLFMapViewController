@@ -80,6 +80,12 @@ open class MapViewController: UIViewController {
 
     // MARK: Implementation
 
+    fileprivate var hasSearch: Bool {
+        return !preparedSearchQuery.isEmpty
+    }
+    fileprivate var preparedSearchQuery: String {
+        return searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) ?? ""
+    }
     fileprivate var removableAnnotations: [MKAnnotation] {
         return mapView.annotations.filter(isNonSelectedPlacemark)
     }
@@ -487,9 +493,9 @@ extension MapViewController: UISearchBarDelegate {
 
     open func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        guard let query = preparedSearchQuery, !query.isEmpty else { return }
+        guard hasSearch else { return }
         shouldDebounceNextSearch = false
-        searchQuery = query
+        searchQuery = preparedSearchQuery
     }
 
     open func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -506,18 +512,12 @@ extension MapViewController: UISearchControllerDelegate {}
 
 extension MapViewController: UISearchResultsUpdating {
 
-    var preparedSearchQuery: String? {
-        guard let text = searchController.searchBar.text else { return nil }
-        return text.trimmingCharacters(in: .whitespaces)
-    }
-
     open func updateSearchResults(for searchController: UISearchController) {
-        guard let query = preparedSearchQuery else { return }
-        guard !query.isEmpty else {
+        guard hasSearch else {
             mapView.removeAnnotations(removableAnnotations)
             return
         }
-        searchQuery = query
+        searchQuery = preparedSearchQuery
     }
 
 }
