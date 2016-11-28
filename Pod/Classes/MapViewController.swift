@@ -46,6 +46,7 @@ open class MapViewController: UIViewController {
     open var pinColor: UIColor?
     open var searchDebounceDuration: TimeInterval = 0.6
     open var selectedMapItem: MKMapItem?
+    open var userLocationDebounceDuration: TimeInterval = 0.6
     open var zoomedInSpan: CLLocationDegrees = 0.01
 
     public var hasResults: Bool { return !resultsViewController.mapItems.isEmpty }
@@ -287,6 +288,10 @@ open class MapViewController: UIViewController {
         mapView.showAnnotations(annotations, animated: true)
     }
 
+    @objc fileprivate func zoomToUserLocation() {
+        zoomIn(to: mapView.userLocation.location!, animated: false)
+    }
+
     // MARK: Hack: http://stackoverflow.com/a/38155566/65465
 
     fileprivate var deferredSelectedPinView: MKPinAnnotationView?
@@ -424,9 +429,10 @@ extension MapViewController: MKMapViewDelegate {
     open func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         guard selectedMapItem == nil else { return }
         guard mapView.selectedAnnotations.isEmpty else { return }
-        guard let location = userLocation.location else { return }
+        guard let _ = userLocation.location else { return }
 
-        zoomIn(to: location, animated: false)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(zoomToUserLocation), object: nil)
+        self.perform(#selector(zoomToUserLocation), with: nil, afterDelay: userLocationDebounceDuration)
     }
 
     open func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
