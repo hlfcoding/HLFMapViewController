@@ -95,8 +95,8 @@ open class MapViewController: UIViewController {
         return searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
     fileprivate var previousVisibleRect: MKMapRect?
-    fileprivate var removableAnnotations: [MKAnnotation] {
-        return mapView.annotations.filter(isNonSelectedPlacemark)
+    fileprivate var removableAnnotations: [MKPlacemark] {
+        return mapView.annotations.filter(isNonSelectedPlacemark) as! [MKPlacemark]
     }
     fileprivate var search: MKLocalSearch?
     fileprivate var searchQuery = "" {
@@ -278,15 +278,22 @@ open class MapViewController: UIViewController {
     }
 
     /**
-     Simply reloads. But it returns the new annotations because using `MKMapView.annotations`
-     or `MKMapItem.placemark` seems to yield equal but new references unsuited for selecting.
+     Selectively updates `mapView` annotations, adding only what's needed and removing as
+     needed.
+
+     But it returns the new annotations because using `MKMapView.annotations` or
+     `MKMapItem.placemark` seems to yield equal but new references unsuited for selecting.
      Doing so would fail with a warning about 'un-added' annotations.
      */
     fileprivate func updateAnnotations() -> [MKAnnotation] {
-        mapView.removeAnnotations(removableAnnotations)
-        let placemarks = resultsViewController.mapItems.map { $0.placemark }
-        mapView.addAnnotations(placemarks.filter(isNonSelectedPlacemark))
-        return placemarks
+        let existing = mapView.annotations.filter { $0 is MKPlacemark } as! [MKPlacemark]
+        let new = resultsViewController.mapItems.map { $0.placemark }
+        let toAdd = new.filter { self.isNonSelectedPlacemark($0) && !existing.contains($0) }
+        let toRemove = removableAnnotations.filter { !new.contains($0) }
+
+        mapView.removeAnnotations(toRemove)
+        mapView.addAnnotations(toAdd)
+        return new
     }
 
     fileprivate func updateSearchRequest() {
