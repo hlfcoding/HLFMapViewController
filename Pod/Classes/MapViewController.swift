@@ -241,6 +241,7 @@ open class MapViewController: UIViewController {
     @objc fileprivate func redoSearch() {
         isRedoingSearch = true
         search?.cancel()
+        mapIndicator.startAnimating()
         searchRegion = mapView.region
     }
 
@@ -289,6 +290,7 @@ open class MapViewController: UIViewController {
             self.resultsViewController.mapItems = mapItems
             if self.isRedoingSearch {
                 self.updateAnnotations()
+                self.mapIndicator.stopAnimating()
             }
             self.search = nil
         }
