@@ -84,6 +84,12 @@ open class MapViewController: UIViewController {
     fileprivate var hasSearch: Bool {
         return !preparedSearchQuery.isEmpty
     }
+    fileprivate var hasSelectedPin: Bool {
+        return !mapView.selectedAnnotations.isEmpty
+    }
+    fileprivate var isQuerying: Bool {
+        return searchController.searchBar.isFirstResponder
+    }
     fileprivate var preparedSearchQuery: String {
         return searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
@@ -518,10 +524,8 @@ extension MapViewController: MKMapViewDelegate {
         if isDeferringSelection {
             performDeferredSelection(animated: animated)
         } else {
-            guard !searchController.searchBar.isFirstResponder else { return }
-            guard mapView.selectedAnnotations.isEmpty else { return }
-            guard hasSearch else { return }
-            guard wasMapPanned else { return }
+            guard !hasSelectedPin && !isQuerying else { return }
+            guard hasSearch && (wasMapPanned && !animated) else { return }
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(redoSearch), object: nil)
             self.perform(#selector(redoSearch), with: nil, afterDelay: searchDebounceDuration)
         }
