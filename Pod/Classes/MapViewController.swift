@@ -36,7 +36,12 @@ open class MapViewController: UIViewController {
     /** Not required, but this view controller is pretty useless without a delegate. */
     open weak var delegate: MapViewControllerDelegate?
 
-    @IBOutlet open weak var mapLoadingIndicator: UIActivityIndicatorView!
+    @available(*, deprecated, renamed: "mapIndicator")
+    open var mapLoadingIndicator: UIActivityIndicatorView! {
+        get { return mapIndicator }
+        set { mapIndicator = newValue }
+    }
+    @IBOutlet open var mapIndicator: UIActivityIndicatorView!
     @IBOutlet open var mapView: MKMapView!
 
     open fileprivate(set) var locationManager: CLLocationManager!
@@ -56,7 +61,7 @@ open class MapViewController: UIViewController {
 
         initLocationManager()
         initSearchController()
-        mapLoadingIndicator.color = view.tintColor
+        mapIndicator.color = view.tintColor
 
         // TODO: Handle location loading timeout.
     }
@@ -80,6 +85,17 @@ open class MapViewController: UIViewController {
     }
 
     // MARK: Implementation
+
+    @IBOutlet fileprivate var mapIndicatorLoadingConstraints: [NSLayoutConstraint]!
+    fileprivate lazy var mapIndicatorSearchingConstraints: [NSLayoutConstraint] = {
+        let container = self.mapIndicator.superview!
+        return [
+            self.mapIndicator.topAnchor.constraint(
+                equalTo: self.topLayoutGuide.bottomAnchor, constant: container.layoutMargins.top),
+            self.mapIndicator.trailingAnchor.constraint(
+                equalTo: container.layoutMarginsGuide.trailingAnchor),
+        ]
+    }()
 
     fileprivate var hasSearch: Bool {
         return !preparedSearchQuery.isEmpty
@@ -234,7 +250,9 @@ open class MapViewController: UIViewController {
     fileprivate func revealMapView(completion: (() -> Void)? = nil) {
         guard mapView.isHidden else { return }
 
-        mapLoadingIndicator.stopAnimating()
+        mapIndicator.stopAnimating()
+        NSLayoutConstraint.deactivate(mapIndicatorLoadingConstraints)
+        NSLayoutConstraint.activate(mapIndicatorSearchingConstraints)
 
         mapView.alpha = 0
         mapView.isHidden = false
