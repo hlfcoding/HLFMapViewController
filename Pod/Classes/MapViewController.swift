@@ -37,7 +37,7 @@ open class MapViewController: UIViewController {
     open weak var delegate: MapViewControllerDelegate?
 
     @IBOutlet open weak var mapLoadingIndicator: UIActivityIndicatorView!
-    @IBOutlet open weak var mapView: MKMapView!
+    @IBOutlet open var mapView: MKMapView!
 
     open fileprivate(set) var locationManager: CLLocationManager!
     open fileprivate(set) var searchController: UISearchController!
