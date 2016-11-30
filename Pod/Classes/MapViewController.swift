@@ -90,6 +90,7 @@ open class MapViewController: UIViewController {
     fileprivate var isQuerying: Bool {
         return searchController.searchBar.isFirstResponder
     }
+    fileprivate var isRedoingSearch = false
     fileprivate var preparedSearchQuery: String {
         return searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) ?? ""
     }
@@ -222,7 +223,9 @@ open class MapViewController: UIViewController {
     }
 
     @objc fileprivate func redoSearch() {
-        print("update region and redo search in new region, without UI")
+        isRedoingSearch = true
+        search?.cancel()
+        searchRegion = mapView.region
     }
 
     /**
@@ -266,6 +269,10 @@ open class MapViewController: UIViewController {
 
             guard mapItems != self.resultsViewController.mapItems else { return }
             self.resultsViewController.mapItems = mapItems
+            if self.isRedoingSearch {
+                self.updateAnnotations()
+            }
+            self.search = nil
         }
         self.search = search
     }
