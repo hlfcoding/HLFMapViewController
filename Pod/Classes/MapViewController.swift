@@ -51,6 +51,7 @@ open class MapViewController: UIViewController {
     open var pinColor: UIColor?
     open var searchDebounceDuration: TimeInterval = 0.6
     open var selectedMapItem: MKMapItem?
+    open var shouldRedoSearchOnPan = true
     open var userLocationDebounceDuration: TimeInterval = 0.6
     open var zoomedInSpan: CLLocationDegrees = 0.01
 
@@ -557,7 +558,7 @@ extension MapViewController: MKMapViewDelegate {
     open func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         if isDeferringSelection {
             performDeferredSelection(animated: animated)
-        } else {
+        } else if shouldRedoSearchOnPan {
             guard !hasSelectedPin && !isQuerying else { return }
             guard hasSearch && (wasMapPanned && !animated) else { return }
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(redoSearch), object: nil)
