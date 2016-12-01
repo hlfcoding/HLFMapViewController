@@ -63,6 +63,9 @@ open class MapViewController: UIViewController {
         initLocationManager()
         initSearchController()
         mapIndicator.color = view.tintColor
+        mapIndicator.layer.shadowOffset = .zero
+        mapIndicator.layer.shadowOpacity = 0.5
+        mapIndicator.layer.shadowRadius = 3
 
         // TODO: Handle location loading timeout.
     }
