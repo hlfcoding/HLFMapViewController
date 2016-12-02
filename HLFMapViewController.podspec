@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "HLFMapViewController"
-  s.version          = "0.3.1"
+  s.version          = "0.4.0"
   s.summary          = "Map modal for searching and selecting a location."
   s.description      = <<-DESC
                        A generic implementation of a common feature: searching
