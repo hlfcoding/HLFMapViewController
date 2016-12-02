@@ -293,7 +293,7 @@ open class MapViewController: UIViewController {
             guard mapItems != self.resultsViewController.mapItems else { return }
             self.resultsViewController.mapItems = mapItems
             if self.isRedoingSearch {
-                self.updateAnnotations()
+                let _ = self.updateAnnotations()
                 self.mapIndicator.stopAnimating()
             }
             self.search = nil
@@ -545,7 +545,7 @@ extension MapViewController: MKMapViewDelegate {
     }
 
     open func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        guard let view = view as? MKPinAnnotationView else { return }
+        guard view is MKPinAnnotationView else { return }
         guard !isDeferringSelection else { return }
         zoomOut(animated: true)
     }
