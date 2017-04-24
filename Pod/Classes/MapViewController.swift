@@ -175,7 +175,7 @@ open class MapViewController: UIViewController {
         let status = CLLocationManager.authorizationStatus()
         switch status {
         case .notDetermined:
-            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
 
         case .authorizedAlways, .authorizedWhenInUse:
             mapView.showsUserLocation = true
