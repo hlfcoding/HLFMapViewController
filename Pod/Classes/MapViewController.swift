@@ -148,8 +148,8 @@ open class MapViewController: UIViewController {
      */
     fileprivate func arePlacemarksEqual(_ a: MKPlacemark, _ b: MKPlacemark) -> Bool {
         return (
-            abs(a.coordinate.latitude - b.coordinate.latitude) < DBL_EPSILON &&
-            abs(a.coordinate.longitude - b.coordinate.longitude) < DBL_EPSILON
+            abs(a.coordinate.latitude - b.coordinate.latitude) < .ulpOfOne &&
+            abs(a.coordinate.longitude - b.coordinate.longitude) < .ulpOfOne
         )
     }
 
@@ -286,7 +286,7 @@ open class MapViewController: UIViewController {
         let search = MKLocalSearch(request: searchRequest)
         search.start { [unowned self] (searchResponse, error) in
             guard let mapItems = searchResponse?.mapItems else {
-                print("MKLocalSearch error: \(error)")
+                print("MKLocalSearch error: \(String(describing: error))")
                 return
             }
 
