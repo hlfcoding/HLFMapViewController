@@ -9,13 +9,12 @@ Pod::Spec.new do |s|
   s.screenshots      = [ 'https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-1-2.png',
                          'https://dl.dropboxusercontent.com/u/305699/hlf-map-view-controller-2-2.png' ]
   s.homepage         = 'https://github.com/hlfcoding/HLFMapViewController'
-  s.license          = 'MIT'
+  s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Peng Wang' => 'peng@pengxwang.com' }
   s.source           = { :git => 'https://github.com/hlfcoding/HLFMapViewController.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/hlfcoding'
 
-  s.platform     = :ios, '9.0'
-  s.requires_arc = true
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'Pod/Classes/**/*'
   s.resources = 'Pod/Assets/**/*'
