@@ -11,7 +11,7 @@
 
 ## Usage
 
-This version uses Swift 3 and Cocoapods 0.1.0+. The final Swift 2 version is 0.2.5.
+This version uses Swift 3. The final Swift 2 version is 0.2.5.
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
